@@ -1,305 +1,267 @@
-:root {
-    --primary: #2C3E50; /* 深藍灰 (日式傳統色：鐵御納戶) */
-    --accent: #C75959; /* 茜色 (強調色) */
-    --bg: #F9F9F9;    /* 米白 */
-    --card-bg: #FFFFFF;
-    --text: #333333;
-    --sub-text: #666666;
-    --border-radius: 12px;
-    --shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-* {
-    box-sizing: border-box;
+/*
+ * 基礎設置與排版
+ */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
     margin: 0;
     padding: 0;
-    font-family: 'Noto Sans TC', sans-serif;
-    -webkit-tap-highlight-color: transparent;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    padding-bottom: 70px; /* 留出空間給底部導航欄 */
 }
 
-body {
-    background-color: var(--bg);
-    color: var(--text);
-    padding-bottom: 80px; /* 留給底部導航 */
+#app-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
 }
 
-/* Header */
-.app-header {
-    background-color: var(--card-bg);
-    padding: 20px 20px 10px;
+/*
+ * 頂部標題 (Header)
+ */
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 10px 0;
+    text-align: center;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.app-header h1 {
-    font-size: 1.4rem;
-    letter-spacing: 2px;
-    color: var(--primary);
-    margin: 0;
+header h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    margin-top: 0;
 }
 
-/* Daily Weather Card (NEW) */
-.weather-card {
-    background: #eaf1f8; /* 淺藍色背景 */
-    padding: 15px;
-    border-radius: var(--border-radius);
-    margin: 15px;
-    box-shadow: var(--shadow);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.weather-icon {
-    font-size: 2.5rem;
-    color: #f39c12;
-}
-.weather-info h3 {
-    font-size: 1.1rem;
-    color: var(--primary);
-    margin-bottom: 5px;
-}
-.weather-info p {
-    font-size: 0.9rem;
-    color: var(--sub-text);
-}
-
-/* Tabs for Days */
+/*
+ * 日期標籤 (Day Tabs)
+ */
 .day-tabs {
     display: flex;
     justify-content: space-around;
-    padding: 15px 10px;
-    background: var(--bg);
-    overflow-x: auto;
-    border-bottom: 1px solid #eee;
+    padding-top: 10px;
 }
 
 .day-btn {
-    background: none;
+    flex-grow: 1;
     border: none;
-    font-size: 0.9rem;
-    color: #999;
-    padding: 8px 12px;
-    border-radius: 20px;
+    background-color: #007bff;
+    color: #cce0ff;
+    padding: 10px 5px;
+    font-size: 0.9em;
     cursor: pointer;
-    line-height: 1.2;
-    transition: all 0.3s;
+    transition: background-color 0.2s, color 0.2s, border-bottom 0.2s;
+    border-bottom: 3px solid transparent;
+}
+
+.day-btn:hover {
+    background-color: #0069d9;
 }
 
 .day-btn.active {
-    background-color: var(--primary);
     color: white;
     font-weight: bold;
-    box-shadow: 0 4px 8px rgba(44, 62, 80, 0.3);
+    border-bottom: 3px solid #ffc107; /* 突出顯示當前日期 */
+    background-color: #0069d9;
 }
 
-/* Content Area */
-.day-content {
-    display: none;
-    padding: 0 15px;
-    animation: fadeIn 0.3s ease;
-}
-
-.day-content.active {
-    display: block;
-}
-
-.date-header {
-    margin: 10px 0 20px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--primary);
-    border-left: 4px solid var(--accent);
-    padding-left: 10px;
-}
-
-/* Cards */
-.card {
-    background: var(--card-bg);
-    border-radius: var(--border-radius);
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: var(--shadow);
-    display: flex;
-    gap: 15px;
-    position: relative;
-    border-left: 4px solid transparent;
-    flex-direction: column; /* 將內容垂直排列 */
-}
-
-/* Card Types Colors */
-.card.transport { border-left-color: #3498db; }
-.card.spot { border-left-color: #e67e22; }
-.card.food { border-left-color: #e74c3c; }
-.card.hotel { border-left-color: #9b59b6; }
-
-.time {
-    font-weight: bold;
-    color: var(--primary);
-    font-family: monospace;
-    font-size: 1rem;
-    min-width: 50px;
-    align-self: flex-start;
-}
-
-.details-wrapper {
-    display: flex;
-    gap: 15px;
-}
-
-.details {
-    flex: 1;
-}
-
-.details h3 {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    color: var(--text);
-}
-
-.details p {
-    font-size: 0.9rem;
-    color: var(--sub-text);
-    margin-bottom: 8px;
-    line-height: 1.4;
-}
-
-/* Image Preview Placeholder (NEW) */
-.image-preview {
-    width: 100%;
-    height: 100px; /* 預設高度 */
-    background: #eee;
-    border-radius: 8px;
-    margin-top: 10px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    color: #999;
-}
-.image-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Guide Tips & Souvenirs (NEW COLORS) */
-.guide-tip, .souvenir-tip {
-    padding: 8px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    margin-top: 8px;
-    line-height: 1.4;
-}
-
-.guide-tip {
-    background-color: #fff8e1; /* 黃色 */
-    color: #8d6e63;
-}
-.souvenir-tip {
-    background-color: #e8f5e9; /* 綠色 */
-    color: #2e7d32;
-}
-
-
-/* Tags */
-.tags {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-    margin-top: 5px;
-}
-
-.tag {
-    font-size: 0.7rem;
-    padding: 2px 8px;
-    border-radius: 4px;
-    color: white;
-}
-
-.tag.reservation { background-color: #e74c3c; }
-.tag.must-eat { background-color: #f39c12; }
-.tag.warning { background-color: #7f8c8d; }
-
-.map-btn {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 0.8rem;
-    color: var(--primary);
-    text-decoration: none;
-    border: 1px solid var(--primary);
-    padding: 4px 10px;
-    border-radius: 20px;
-    align-self: flex-start;
-}
-
-/* Info Section (Tools) */
-.view-hidden { display: none; }
-.info-view { padding: 15px; }
-
-.info-section { 
-    padding: 15px; 
-    margin-bottom: 20px;
-    background: var(--card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-}
-.info-section h2 { 
-    font-size: 1.1rem; 
-    margin-bottom: 10px; 
-    color: var(--primary); 
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
-}
-.info-card p { margin-bottom: 8px; font-size: 0.95rem; }
-
-/* Currency Converter */
-.currency-converter {
-    text-align: center;
-}
-.currency-converter input {
-    width: 100%;
+/*
+ * 主要內容區塊
+ */
+#main-content {
     padding: 10px;
-    font-size: 1.2rem;
-    text-align: center;
+}
+
+/* 視圖切換邏輯 */
+.view-hidden {
+    display: none !important;
+}
+
+.active-view {
+    display: block !important;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/*
+ * 行程內容 (Itinerary View)
+ */
+.day-content {
+    padding-bottom: 20px;
+}
+
+.day-content h2 {
+    color: #007bff;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    margin-top: 15px;
+    font-size: 1.3em;
+}
+
+.activity {
+    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.activity h3 {
+    color: #343a40;
+    font-size: 1.1em;
+    margin-top: 0;
+    border-bottom: 1px dashed #e9ecef;
+    padding-bottom: 5px;
+}
+
+.activity p {
+    margin: 5px 0 0;
+    color: #555;
+    font-size: 0.95em;
+}
+
+/*
+ * 資訊/工具頁面 (Info View) - 通用卡片
+ */
+#info-view h2 {
+    color: #343a40;
+    font-size: 1.3em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+.info-card {
+    background-color: #fff;
+    border: 1px solid #cce5ff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.hotel-card {
+    padding: 0; /* 讓圖片可以貼邊 */
+}
+
+/* 住宿資訊樣式 */
+.nearby-list li {
+    padding: 5px 0;
+    font-size: 0.9em;
+    border-bottom: 1px dotted #f0f0f0;
+}
+
+/* 導航按鈕 (通用) */
+.map-btn {
+    display: block;
+    text-align: center;
+    background-color: #28a745;
+    color: white !important;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.map-btn:hover {
+    background-color: #1e7e34;
+}
+
+/*
+ * 匯率計算機樣式
+ */
+.currency-converter-box {
+    padding: 10px;
+}
+.rate-setting input,
+#jpy-input {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    margin-right: 5px;
+    font-size: 1em;
+}
+
+#jpy-input {
+    width: 95%;
     margin-bottom: 10px;
 }
-#twd-output { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+
+.conversion-arrow {
+    text-align: center;
+    color: #007bff;
+    margin: 5px 0;
+}
+
+.conversion-result {
+    text-align: center;
+    background-color: #e9ecef;
+    color: #343a40;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 10px;
+}
 
 
-/* Bottom Nav */
+/*
+ * 底部導航欄 (Bottom Navigation)
+ */
 .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: white;
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 600px; /* 配合 app-container 寬度 */
+    margin: 0 auto;
+    background-color: #343a40;
+    border-top: 1px solid #444;
+    padding: 5px 0;
     z-index: 200;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .nav-btn {
+    flex-grow: 1;
     border: none;
     background: none;
+    color: #ccc;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: color 0.2s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #999;
-    font-size: 0.8rem;
-    cursor: pointer;
+    text-align: center;
 }
 
-.nav-btn i { font-size: 1.2rem; margin-bottom: 4px; }
-.nav-btn.active { color: var(--primary); }
+.nav-btn i {
+    font-size: 1.2em;
+    margin-bottom: 3px;
+}
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
+.nav-btn:hover {
+    color: #fff;
+}
+
+.nav-btn.active {
+    color: #ffc107;
+    font-weight: bold;
 }
