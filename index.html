@@ -196,3 +196,144 @@
                             <div class="tags"><span class="tag warning">準時出發，逾時不候</span></div>
                             <a href="https://www.google.com/maps/search/?api=1&query=Nagoya+Station+Taikodori+Exit" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
                         </div>
+</div>
+                </div>
+
+                <div class="card spot">
+                    <div class="time">08:30</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-mountain"></i> 高山 + 合掌村</h3>
+                            <p>飛驒高山老街、白川鄉合掌造</p>
+                            <div class="guide-tip">🍢 必吃：**飛驒牛握壽司** (在高山老街)、**五平餅**。</div>
+                            <div class="souvenir-tip">🎁 必買：飛驒地區傳統的**猴寶寶玩偶** (Sarubobo) 保平安。</div>
+                        </div>
+                    </div>
+                    <div class="image-preview"></div>
+                </div>
+
+                <div class="card hotel">
+                    <div class="time">20:00</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-hot-tub"></i> Dormy Inn PREMIUM</h3>
+                            <p>榮區 / 免費宵夜拉麵 + 溫泉</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="day5" class="day-content">
+                <div class="date-header">12/22 (一) 大須・常滑・機場返台</div>
+                
+                <div class="weather-card">
+                    <div class="weather-icon"><i class="fas fa-sun"></i></div>
+                    <div class="weather-info">
+                        <h3>10°C / 4°C ｜ 出境日</h3>
+                        <p>天氣：晴朗。建議：穿脫方便的衣物，準備好托運行李。</p>
+                    </div>
+                </div>
+
+                <div class="card spot">
+                    <div class="time">10:00</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-store"></i> 大須商店街</h3>
+                            <p>大須觀音 / 水曜日的愛麗絲 / C-pla / 三輪神社</p>
+                            <div class="tags"><span class="tag must-eat">午餐: 大須の森咖啡廳 (IG預約13:30)</span></div>
+                            <div class="souvenir-tip">🎁 必買：商店街的各種**扭蛋**、**藥妝**。</div>
+                        </div>
+                    </div>
+                    <div class="image-preview"></div>
+                </div>
+
+                <div class="card spot">
+                    <div class="time">16:30</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-shopping-bag"></i> Aeon Mall 常滑店</h3>
+                            <p>招財貓故鄉、機場前的最後採買</p>
+                            <div class="guide-tip">✈️ 離機場只有一站名鐵車程，極度方便！</div>
+                        </div>
+                    </div>
+                    <div class="image-preview"></div>
+                </div>
+
+                <div class="card transport">
+                    <div class="time">22:45</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-plane"></i> 樂桃 MM723 返台</h3>
+                            <p>名古屋 NGO ➝ 台北 TPE</p>
+                            <p class="note">若時間充裕：機場內**半藏製麵** (獅子丸擔擔麵)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="info-view" class="view-hidden info-view">
+            <div class="info-section">
+                <h2><i class="fas fa-calculator"></i> 即時匯率換算</h2>
+                <div class="currency-converter">
+                    <input type="number" id="jpy-input" placeholder="日幣 (JPY)" oninput="convertCurrency()">
+                    <span class="arrow">⬇</span>
+                    <div id="twd-output">約 0 TWD</div>
+                    <small>以匯率 0.22 估算 (可修改 `script.js`)</small>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2><i class="fas fa-passport"></i> 航班資訊</h2>
+                <div class="info-card">
+                    <p><strong>去程 (12/18) MM722:</strong> 02:55 - 06:25</p>
+                    <p><strong>回程 (12/22) MM723:</strong> 22:45 - 01:25 (+1)</p>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2><i class="fas fa-hotel"></i> 住宿清單</h2>
+                <div class="info-card">
+                    <p>Day 1, 2: **名古屋站前大和roynet飯店**</p>
+                    <p>Day 3: **金星Neo飯店** (近鶴舞站)</p>
+                    <p>Day 4: **Dormy Inn PREMIUM Sakae** (免費宵夜拉麵+溫泉)</p>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2><i class="fas fa-address-book"></i> 緊急聯絡</h2>
+                <div class="info-card">
+                    <p>**報警:** 110 | **救護:** 119</p>
+                    <p>**外交部急難救助專線:** +81-80-1009-7179</p>
+                </div>
+            </div>
+            
+             <div class="info-section">
+                <h2><i class="fas fa-money-check-alt"></i> 記帳/預算表</h2>
+                <div class="info-card">
+                    <p>您可以將此處作為手寫或截圖備忘空間。</p>
+                    <p>**預算分類：**</p>
+                    <p>住宿： ¥ [ ]</p>
+                    <p>交通： ¥ [ ] (名鐵、巴士)</p>
+                    <p>餐飲： ¥ [ ]</p>
+                    <p>門票/行程： ¥ [ ]</p>
+                    <p>購物/伴手禮： ¥ [ ]</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="switchTab('itinerary')">
+            <i class="fas fa-calendar-alt"></i>
+            <span>行程</span>
+        </button>
+        <button class="nav-btn" onclick="switchTab('info')">
+            <i class="fas fa-suitcase"></i>
+            <span>工具/資訊</span>
+        </button>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
