@@ -219,4 +219,18 @@
                     <input type="number" id="jpy-input" placeholder="日幣 (JPY)" oninput="convertCurrency()">
                     <span class="arrow">⬇</span>
                     <div id="twd-output">約 0 TWD</div>
-   
+ <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="switchTab('itinerary')">
+            <i class="fas fa-calendar-alt"></i>
+            <span>行程</span>
+        </button>
+        <button class="nav-btn" onclick="switchTab('info')">
+            <i class="fas fa-suitcase"></i>
+            <span>工具/資訊</span>
+        </button>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>  
+
