@@ -5,8 +5,12 @@
 // 匯率設定
 const BASE_CURRENCY = 'TWD'; // 基礎貨幣：台幣
 const TARGET_CURRENCY = 'JPY'; // 目標貨幣：日圓
-// 預設匯率 (1 TWD 可換多少 JPY)。您可以在此修改預設值。
-const defaultExchangeRate = 4.5; 
+
+// 硬性預設值 (如果本地儲存中沒有值時使用)
+const hardcodedDefaultRate = 4.5; 
+
+// 應用程式將使用的匯率 (初始化時從本地儲存載入)
+let currentExchangeRate = hardcodedDefaultRate;
 
 // 住宿清單 - 包含詳細資訊
 const accommodations = [
@@ -74,7 +78,7 @@ function switchTab(targetViewId) {
 
     // 更新底部導航按鈕的 active 狀態
     document.querySelectorAll('.bottom-nav .nav-btn').forEach(btn => {
-        if (btn.onclick.toString().includes(`'${targetViewId.replace('-view', '')}'`)) {
+        if (btn.onclick && btn.onclick.toString().includes(`'${targetViewId.replace('-view', '')}'`)) {
             btn.classList.add('active');
         } else {
             btn.classList.remove('active');
@@ -112,11 +116,59 @@ function showDay(dayId) {
 
 
 // =========================================================================
-// 資訊頁面函式：匯率換算
+// 資訊頁面函式：匯率管理與換算
 // =========================================================================
 
 /**
- * 匯率換算函式：將日圓換算為台幣 (使用預設匯率)
+ * 載入本地儲存的匯率，若無則使用預設值。
+ */
+function loadExchangeRate() {
+    const savedRate = localStorage.getItem('customExchangeRate');
+    if (savedRate) {
+        currentExchangeRate = parseFloat(savedRate);
+    } else {
+        currentExchangeRate = hardcodedDefaultRate;
+    }
+}
+
+/**
+ * 將新的匯率儲存到瀏覽器的本地儲存中
+ */
+function saveExchangeRate(newRate) {
+    // 檢查輸入是否有效
+    if (newRate > 0) {
+        currentExchangeRate = newRate;
+        localStorage.setItem('customExchangeRate', newRate.toString());
+        // 儲存後更新畫面
+        updateExchangeRateDisplay();
+        convertCurrency();
+        alert(`匯率已更新並儲存！ 1 TWD ≈ ${newRate.toFixed(4)} JPY`);
+    } else {
+        alert("匯率輸入無效，請輸入大於 0 的數字。");
+        // 恢復到舊值
+        const rateInput = document.getElementById('rate-input');
+        if (rateInput) rateInput.value = currentExchangeRate;
+    }
+}
+
+/**
+ * 處理用戶輸入新匯率的事件
+ */
+function handleRateChange() {
+    const rateInput = document.getElementById('rate-input');
+    const newRate = parseFloat(rateInput.value);
+    
+    if (newRate && newRate !== currentExchangeRate) {
+        saveExchangeRate(newRate);
+    }
+    // 如果使用者清空欄位，則恢復到當前值 (避免空值)
+    if (!newRate) {
+        rateInput.value = currentExchangeRate;
+    }
+}
+
+/**
+ * 匯率換算函式：將日圓換算為台幣 (使用當前匯率)
  */
 function convertCurrency() {
     const jpyInput = document.getElementById('jpy-input');
@@ -125,32 +177,43 @@ function convertCurrency() {
     const jpyValue = parseFloat(jpyInput.value);
 
     if (isNaN(jpyValue) || jpyValue <= 0) {
-        twdOutput.textContent = '約 0 TWD';
+        if (twdOutput) twdOutput.textContent = '約 0 TWD';
         return;
     }
 
-    // 計算 TWD = JPY / (JPY/TWD 匯率)
-    const twdValue = jpyValue / defaultExchangeRate;
+    const twdValue = jpyValue / currentExchangeRate;
 
-    twdOutput.textContent = `約 ${twdValue.toFixed(2)} TWD`;
+    if (twdOutput) twdOutput.textContent = `約 ${twdValue.toFixed(2)} TWD`;
 }
 
 
 /**
- * 顯示匯率查詢資訊 (包含換算功能)
+ * 顯示匯率查詢資訊 (包含換算功能和匯率設定)
  */
 function updateExchangeRateDisplay() {
     const container = document.getElementById('currency-display');
     if (!container) return;
 
-    // 清空舊內容
     container.innerHTML = ''; 
 
     // 注入新的換算介面 HTML
     container.innerHTML = `
         <div class="currency-converter-box">
-            <p><i class="fas fa-hand-holding-usd"></i> 預設匯率：**1 TWD ≈ ${defaultExchangeRate.toFixed(2)} JPY**</p>
+            <p><i class="fas fa-hand-holding-usd"></i> <strong>設定當前匯率 (1 TWD = JPY)</strong></p>
             
+            <div class="rate-setting" style="display: flex; gap: 5px; align-items: center; margin-bottom: 10px;">
+                <span style="font-weight: bold;">1 TWD =</span>
+                <input type="number" id="rate-input" 
+                       value="${currentExchangeRate.toFixed(4)}" 
+                       min="0.01" step="0.0001"
+                       style="width: 100px; text-align: right; padding: 5px;"
+                       onchange="handleRateChange()" 
+                       onblur="handleRateChange()">
+                <span style="font-weight: bold;"> JPY</span>
+            </div>
+            
+            <hr style="border: none; border-top: 1px solid #ccc; margin: 15px 0;">
+
             <div class="conversion-fields">
                 <input type="number" id="jpy-input" placeholder="日圓 (JPY) 輸入金額" oninput="convertCurrency()">
                 <div class="conversion-arrow"><i class="fas fa-arrow-down"></i></div>
@@ -158,7 +221,7 @@ function updateExchangeRateDisplay() {
             </div>
             
             <small style="display: block; margin-top: 10px; color: #6c757d;">
-                計算結果為估算值，使用預設匯率。
+                計算結果使用您上方設定的匯率。
             </small>
 
             <a href="https://www.google.com/search?q=${BASE_CURRENCY}+to+${TARGET_CURRENCY}+exchange+rate" target="_blank" class="map-btn" style="margin-top: 10px; display: block;">
@@ -242,15 +305,17 @@ function renderAccommodations() {
 // =========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 首次載入時，確保第一個日期顯示
+    // 1. 載入本地儲存的匯率
+    loadExchangeRate(); 
+
+    // 2. 首次載入時，確保第一個日期顯示
     showDay('day1'); 
     
-    // 預先載入住宿和匯率資訊 (即使在行程頁面)
-    // 確保當用戶切換到 info-view 時，內容能立即顯示
+    // 3. 預先載入住宿和匯率資訊
     renderAccommodations();
     updateExchangeRateDisplay();
 
-    // 綁定底部導航列的事件監聽器
+    // 4. 綁定底部導航列的事件監聽器
     document.querySelectorAll('.bottom-nav .nav-btn').forEach(btn => {
         // 從 onclick 屬性中提取目標視圖 ID (e.g., 'itinerary' -> 'itinerary-view')
         const match = btn.onclick.toString().match(/'([^']*)'/);
@@ -262,6 +327,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // 修正：手動觸發一次 switchTab 到行程，確保 active 狀態正確
+    // 5. 修正：手動觸發一次 switchTab 到行程，確保 active 狀態正確
     switchTab('itinerary-view');
 });
