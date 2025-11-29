@@ -1,233 +1,310 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>名古屋冬日之旅</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
+:root {
+    --primary: #2C3E50; /* 深藍灰 (日式傳統色：鐵御納戶) */
+    --accent: #C75959; /* 茜色 (強調色) */
+    --bg: #F9F9F9;    /* 米白 */
+    --card-bg: #FFFFFF;
+    --text: #333333;
+    --sub-text: #666666;
+    --border-radius: 12px;
+    --shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
 
-    <header class="app-header">
-        <h1>NAGOYA 2025</h1>
-        <div class="weather-widget">
-            <span id="weather-text">12月預報: 3°C~12°C ☀</span>
-            <small>建議穿著: 發熱衣、羊毛大衣、圍巾</small>
-        </div>
-    </header>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans TC', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
 
-    <main id="main-content">
-        <div id="itinerary-view" class="active-view">
-            <div class="day-tabs">
-                <button class="day-btn active" onclick="showDay('day1')">18<br>Thu</button>
-                <button class="day-btn" onclick="showDay('day2')">19<br>Fri</button>
-                <button class="day-btn" onclick="showDay('day3')">20<br>Sat</button>
-                <button class="day-btn" onclick="showDay('day4')">21<br>Sun</button>
-                <button class="day-btn" onclick="showDay('day5')">22<br>Mon</button>
-            </div>
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    padding-bottom: 80px; /* 留給底部導航 */
+}
 
-            <div id="day1" class="day-content active">
-                <div class="date-header">12/18 (四) 犬山城半日遊 & 榮夜景</div>
-                
-                <div class="card transport">
-                    <div class="time">02:55</div>
-                    <div class="details">
-                        <h3><i class="fas fa-plane"></i> 樂桃 MM722 出發</h3>
-                        <p>台北 TPE ➝ 名古屋 NGO</p>
-                        <div class="tags"><span class="tag warning">預留停車</span></div>
-                    </div>
-                </div>
+/* Header */
+.app-header {
+    background-color: var(--card-bg);
+    padding: 20px 20px 10px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    text-align: center;
+}
 
-                <div class="card food">
-                    <div class="time">09:00</div>
-                    <div class="details">
-                        <h3><i class="fas fa-coffee"></i> Tsubame Bread & Milk</h3>
-                        <p>名古屋必吃早餐</p>
-                        <div class="guide-tip">💡 推薦：紅豆奶油吐司、霜淇淋厚片</div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Tsubame+Bread+%26+Milk+Nagoya" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
-                    </div>
-                </div>
+.app-header h1 {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--primary);
+    margin: 0;
+}
 
-                <div class="card spot">
-                    <div class="time">11:00</div>
-                    <div class="details">
-                        <h3><i class="fas fa-torii-gate"></i> 犬山城區散策</h3>
-                        <p>犬山城、三光稻荷神社</p>
-                        <div class="guide-tip">📸 必拍：三光稻荷神社的粉紅愛心繪馬！</div>
-                        <div class="tags"><span class="tag must-eat">午餐: Seimen Misaku</span></div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Inuyama+Castle" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
-                    </div>
-                </div>
+/* Daily Weather Card (NEW) */
+.weather-card {
+    background: #eaf1f8; /* 淺藍色背景 */
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin: 15px;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.weather-icon {
+    font-size: 2.5rem;
+    color: #f39c12;
+}
+.weather-info h3 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+.weather-info p {
+    font-size: 0.9rem;
+    color: var(--sub-text);
+}
 
-                <div class="card hotel">
-                    <div class="time">16:00</div>
-                    <div class="details">
-                        <h3><i class="fas fa-bed"></i> Check In</h3>
-                        <p>名古屋站前大和 roynet 飯店</p>
-                    </div>
-                </div>
+/* Tabs for Days */
+.day-tabs {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 10px;
+    background: var(--bg);
+    overflow-x: auto;
+    border-bottom: 1px solid #eee;
+}
 
-                <div class="card food">
-                    <div class="time">19:00</div>
-                    <div class="details">
-                        <h3><i class="fas fa-utensils"></i> 月島文字燒</h3>
-                        <div class="tags"><span class="tag reservation">電話預約 19:00</span></div>
-                        <p>榮區晚餐 + HARBS 本店甜點</p>
-                    </div>
-                </div>
-            </div>
+.day-btn {
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    color: #999;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    line-height: 1.2;
+    transition: all 0.3s;
+}
 
-            <div id="day2" class="day-content">
-                <div class="date-header">12/19 (五) 吉卜力公園</div>
-                
-                <div class="card transport">
-                    <div class="time">07:00</div>
-                    <div class="details">
-                        <h3><i class="fas fa-subway"></i> 前往吉卜力公園</h3>
-                        <p>東山線(藤丘站) 轉 丘陵線(愛地球博公園)</p>
-                    </div>
-                </div>
+.day-btn.active {
+    background-color: var(--primary);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(44, 62, 80, 0.3);
+}
 
-                <div class="card spot">
-                    <div class="time">08:00</div>
-                    <div class="details">
-                        <h3><i class="fas fa-tree"></i> 吉卜力公園</h3>
-                        <p>全日遊玩</p>
-                        <div class="guide-tip">⚠️ 攻略：園區很大，請依照票券指定時間入場，建議先下載園區地圖 PDF。</div>
-                    </div>
-                </div>
+/* Content Area */
+.day-content {
+    display: none;
+    padding: 0 15px;
+    animation: fadeIn 0.3s ease;
+}
 
-                <div class="card food">
-                    <div class="time">19:00</div>
-                    <div class="details">
-                        <h3><i class="fas fa-utensils"></i> 矢場とん味噌豬排</h3>
-                        <div class="tags"><span class="tag reservation">GMAP預約 19:00</span> <span class="tag must-eat">名古屋名物</span></div>
-                        <p>必點：鐵板味噌豬排，醬汁淋上去的聲音超療癒！</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Yabaton+Nagoya+Station" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
-                    </div>
-                </div>
-            </div>
+.day-content.active {
+    display: block;
+}
 
-            <div id="day3" class="day-content">
-                <div class="date-header">12/20 (六) 市區遊・花火大會</div>
-                
-                <div class="card spot">
-                    <div class="time">10:15</div>
-                    <div class="details">
-                        <h3><i class="fas fa-landmark"></i> 名古屋城</h3>
-                        <p>日本三大名城之一</p>
-                        <div class="guide-tip">👀 重點：金鯱（屋頂上的金海豚）</div>
-                    </div>
-                </div>
+.date-header {
+    margin: 10px 0 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+}
 
-                <div class="card food">
-                    <div class="time">13:30</div>
-                    <div class="details">
-                        <h3><i class="fas fa-fish"></i> 熱田蓬萊軒 神宮店</h3>
-                        <div class="tags"><span class="tag reservation">電話預約 13:30</span> <span class="tag must-eat">鰻魚三吃</span></div>
-                        <div class="guide-tip">🥢 吃法：1.原味 2.加佐料 3.茶泡飯 4.隨意</div>
-                    </div>
-                </div>
+/* Cards */
+.card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: var(--shadow);
+    display: flex;
+    gap: 15px;
+    position: relative;
+    border-left: 4px solid transparent;
+    flex-direction: column; /* 將內容垂直排列 */
+}
 
-                <div class="card spot">
-                    <div class="time">18:30</div>
-                    <div class="details">
-                        <h3><i class="fas fa-fire"></i> ISOGAI 花火劇場</h3>
-                        <p>名古屋港花火大會</p>
-                        <div class="tags"><span class="tag warning">注意保暖</span></div>
-                    </div>
-                </div>
+/* Card Types Colors */
+.card.transport { border-left-color: #3498db; }
+.card.spot { border-left-color: #e67e22; }
+.card.food { border-left-color: #e74c3c; }
+.card.hotel { border-left-color: #9b59b6; }
 
-                <div class="card hotel">
-                    <div class="time">20:30</div>
-                    <div class="details">
-                        <h3><i class="fas fa-bed"></i> Check In</h3>
-                        <p>金星 Neo 飯店</p>
-                    </div>
-                </div>
-            </div>
+.time {
+    font-weight: bold;
+    color: var(--primary);
+    font-family: monospace;
+    font-size: 1rem;
+    min-width: 50px;
+    align-self: flex-start;
+}
 
-            <div id="day4" class="day-content">
-                <div class="date-header">12/21 (日) 高山・合掌村一日團</div>
-                
-                <div class="card transport">
-                    <div class="time">08:00</div>
-                    <div class="details">
-                        <h3><i class="fas fa-bus"></i> 集合出發</h3>
-                        <p>名古屋站太閣通口西派出所前</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Nagoya+Station+Taikodori+Exit" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
-                    </div>
-                </div>
+.details-wrapper {
+    display: flex;
+    gap: 15px;
+}
 
-                <div class="card spot">
-                    <div class="time">08:30</div>
-                    <div class="details">
-                        <h3><i class="fas fa-mountain"></i> 高山 + 合掌村</h3>
-                        <p>飛驒高山老街、白川鄉合掌造</p>
-                        <div class="guide-tip">🍢 必吃：飛驒牛握壽司、五平餅。</div>
-                        <div class="guide-tip">🎁 伴手禮：猴寶寶玩偶 (Sarubobo) 保平安。</div>
-                    </div>
-                </div>
+.details {
+    flex: 1;
+}
 
-                <div class="card hotel">
-                    <div class="time">20:00</div>
-                    <div class="details">
-                        <h3><i class="fas fa-hot-tub"></i> Dormy Inn PREMIUM</h3>
-                        <p>榮區 / 免費宵夜拉麵 + 溫泉</p>
-                    </div>
-                </div>
-            </div>
+.details h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--text);
+}
 
-            <div id="day5" class="day-content">
-                <div class="date-header">12/22 (一) 大須・常滑・返台</div>
-                
-                <div class="card spot">
-                    <div class="time">10:00</div>
-                    <div class="details">
-                        <h3><i class="fas fa-store"></i> 大須商店街</h3>
-                        <p>大須觀音、水曜日的愛麗絲</p>
-                        <div class="tags"><span class="tag must-eat">午餐: 大須の森咖啡(IG預約13:30)</span></div>
-                    </div>
-                </div>
+.details p {
+    font-size: 0.9rem;
+    color: var(--sub-text);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
 
-                <div class="card spot">
-                    <div class="time">16:30</div>
-                    <div class="details">
-                        <h3><i class="fas fa-shopping-bag"></i> Aeon Mall 常滑</h3>
-                        <p>招財貓故鄉、最後採買</p>
-                        <div class="guide-tip">✈️ 離機場只有一站，好逛又方便。</div>
-                    </div>
-                </div>
+/* Image Preview Placeholder (NEW) */
+.image-preview {
+    width: 100%;
+    height: 100px; /* 預設高度 */
+    background: #eee;
+    border-radius: 8px;
+    margin-top: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #999;
+}
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-                <div class="card transport">
-                    <div class="time">22:45</div>
-                    <div class="details">
-                        <h3><i class="fas fa-plane"></i> 樂桃 MM723 返台</h3>
-                        <p>名古屋 NGO ➝ 台北 TPE</p>
-                        <p class="note">若時間充裕：半藏製麵 獅子丸擔擔麵</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+/* Guide Tips & Souvenirs (NEW COLORS) */
+.guide-tip, .souvenir-tip {
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    line-height: 1.4;
+}
 
-        <div id="info-view" class="view-hidden">
-            <div class="info-section">
-                <h2><i class="fas fa-calculator"></i> 匯率換算</h2>
-                <div class="currency-converter">
-                    <input type="number" id="jpy-input" placeholder="日幣 (JPY)" oninput="convertCurrency()">
-                    <span class="arrow">⬇</span>
-                    <div id="twd-output">約 0 TWD</div>
- <nav class="bottom-nav">
-        <button class="nav-btn active" onclick="switchTab('itinerary')">
-            <i class="fas fa-calendar-alt"></i>
-            <span>行程</span>
-        </button>
-        <button class="nav-btn" onclick="switchTab('info')">
-            <i class="fas fa-suitcase"></i>
-            <span>工具/資訊</span>
-        </button>
-    </nav>
+.guide-tip {
+    background-color: #fff8e1; /* 黃色 */
+    color: #8d6e63;
+}
+.souvenir-tip {
+    background-color: #e8f5e9; /* 綠色 */
+    color: #2e7d32;
+}
+
+
+/* Tags */
+.tags {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+.tag {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: white;
+}
+
+.tag.reservation { background-color: #e74c3c; }
+.tag.must-eat { background-color: #f39c12; }
+.tag.warning { background-color: #7f8c8d; }
+
+.map-btn {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--primary);
+    text-decoration: none;
+    border: 1px solid var(--primary);
+    padding: 4px 10px;
+    border-radius: 20px;
+    align-self: flex-start;
+}
+
+/* Info Section (Tools) */
+.view-hidden { display: none; }
+.info-view { padding: 15px; }
+
+.info-section { 
+    padding: 15px; 
+    margin-bottom: 20px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+.info-section h2 { 
+    font-size: 1.1rem; 
+    margin-bottom: 10px; 
+    color: var(--primary); 
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+.info-card p { margin-bottom: 8px; font-size: 0.95rem; }
+
+/* Currency Converter */
+.currency-converter {
+    text-align: center;
+}
+.currency-converter input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+#twd-output { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+
+
+/* Bottom Nav */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    z-index: 200;
+}
+
+.nav-btn {
+    border: none;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #999;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.nav-btn i { font-size: 1.2rem; margin-bottom: 4px; }
+.nav-btn.active { color: var(--primary); }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
 
     <script src="script.js"></script>
+
