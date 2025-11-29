@@ -1,310 +1,198 @@
-:root {
-    --primary: #2C3E50; /* 深藍灰 (日式傳統色：鐵御納戶) */
-    --accent: #C75959; /* 茜色 (強調色) */
-    --bg: #F9F9F9;    /* 米白 */
-    --card-bg: #FFFFFF;
-    --text: #333333;
-    --sub-text: #666666;
-    --border-radius: 12px;
-    --shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名古屋冬日之旅</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Noto Sans TC', sans-serif;
-    -webkit-tap-highlight-color: transparent;
-}
+    <header class="app-header">
+        <h1>名古屋冬日之旅 (12/18 - 12/22)</h1>
+    </header>
 
-body {
-    background-color: var(--bg);
-    color: var(--text);
-    padding-bottom: 80px; /* 留給底部導航 */
-}
+    <main id="main-content">
+        <div id="itinerary-view" class="active-view">
+            <div class="day-tabs">
+                <button class="day-btn active" onclick="showDay('day1')">18<br>Thu</button>
+                <button class="day-btn" onclick="showDay('day2')">19<br>Fri</button>
+                <button class="day-btn" onclick="showDay('day3')">20<br>Sat</button>
+                <button class="day-btn" onclick="showDay('day4')">21<br>Sun</button>
+                <button class="day-btn" onclick="showDay('day5')">22<br>Mon</button>
+            </div>
 
-/* Header */
-.app-header {
-    background-color: var(--card-bg);
-    padding: 20px 20px 10px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-    text-align: center;
-}
+            <div id="day1" class="day-content active">
+                <div class="date-header">12/18 (四) 犬山城半日遊 & 榮夜景</div>
+                
+                <div class="weather-card">
+                    <div class="weather-icon"><i class="fas fa-sun"></i></div>
+                    <div class="weather-info">
+                        <h3>8°C / 4°C ｜ 名古屋市</h3>
+                        <p>天氣：晴朗有風。建議：**厚羊毛大衣**、發熱衣、圍巾、手套。</p>
+                    </div>
+                </div>
+                
+                <div class="card transport">
+                    <div class="time">02:55</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-plane"></i> 樂桃 MM722 出發</h3>
+                            <p>台北 TPE ➝ 名古屋中部國際機場 NGO</p>
+                            <div class="tags"><span class="tag warning">預留停車時間</span></div>
+                        </div>
+                    </div>
+                </div>
 
-.app-header h1 {
-    font-size: 1.4rem;
-    letter-spacing: 2px;
-    color: var(--primary);
-    margin: 0;
-}
+                <div class="card food">
+                    <div class="time">09:00</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-coffee"></i> Tsubame Bread & Milk</h3>
+                            <p>名古屋必吃早餐店 (先抽號碼牌)</p>
+                            <div class="guide-tip">💡 必點：紅豆奶油吐司、霜淇淋厚片。</div>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Tsubame+Bread+%26+Milk+Nagoya" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
+                        </div>
+                    </div>
+                    <div class="image-preview">[attachment_0](attachment)</div>
+                </div>
 
-/* Daily Weather Card (NEW) */
-.weather-card {
-    background: #eaf1f8; /* 淺藍色背景 */
-    padding: 15px;
-    border-radius: var(--border-radius);
-    margin: 15px;
-    box-shadow: var(--shadow);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.weather-icon {
-    font-size: 2.5rem;
-    color: #f39c12;
-}
-.weather-info h3 {
-    font-size: 1.1rem;
-    color: var(--primary);
-    margin-bottom: 5px;
-}
-.weather-info p {
-    font-size: 0.9rem;
-    color: var(--sub-text);
-}
+                <div class="card spot">
+                    <div class="time">11:00</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-torii-gate"></i> 犬山城區散策</h3>
+                            <p>犬山城 (日本最古老天守閣) / 三光稻荷神社 / 城下町</p>
+                            <div class="guide-tip">📸 必看：**三光稻荷神社**的粉紅愛心繪馬。</div>
+                            <div class="tags"><span class="tag must-eat">午餐: Seimen Misaku (雞醬油拉麵)</span></div>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Inuyama+Castle" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
+                        </div>
+                    </div>
+                    <div class="image-preview"></div>
+                </div>
 
-/* Tabs for Days */
-.day-tabs {
-    display: flex;
-    justify-content: space-around;
-    padding: 15px 10px;
-    background: var(--bg);
-    overflow-x: auto;
-    border-bottom: 1px solid #eee;
-}
+                <div class="card food">
+                    <div class="time">19:00</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-utensils"></i> 月島文字燒 & HARBS</h3>
+                            <div class="tags"><span class="tag reservation">月島文字燒: 電話預約 19:00</span></div>
+                            <p>榮區晚餐 + **HARBS 榮本店** (甜點)</p>
+                            <div class="guide-tip">🍰 HARBS 必點：**水果千層蛋糕**。</div>
+                        </div>
+                    </div>
+                    <div class="image-preview">[attachment_1](attachment)</div>
+                </div>
+            </div>
 
-.day-btn {
-    background: none;
-    border: none;
-    font-size: 0.9rem;
-    color: #999;
-    padding: 8px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    line-height: 1.2;
-    transition: all 0.3s;
-}
+            <div id="day2" class="day-content">
+                <div class="date-header">12/19 (五) 吉卜力公園一日遊</div>
+                
+                <div class="weather-card">
+                    <div class="weather-icon"><i class="fas fa-cloud-sun"></i></div>
+                    <div class="weather-info">
+                        <h3>9°C / 3°C ｜ 長久手市 (較市區冷)</h3>
+                        <p>天氣：多雲。建議：保暖**絨毛背心**或**輕羽絨**加在大衣內。</p>
+                    </div>
+                </div>
+                
+                <div class="card spot">
+                    <div class="time">08:00</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-tree"></i> 吉卜力公園</h3>
+                            <p>全日遊玩 (大倉庫、青春之丘、Dondoko之森)</p>
+                            <div class="guide-tip">⚠️ 攻略：票券時間嚴格，請務必準時。**吉卜力大倉庫**需預留 3 小時以上。</div>
+                            <div class="souvenir-tip">🎁 必買：大倉庫周邊商店限定的**龍貓、無臉男商品**。</div>
+                        </div>
+                    </div>
+                    <div class="image-preview">[attachment_2](attachment)</div>
+                </div>
 
-.day-btn.active {
-    background-color: var(--primary);
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(44, 62, 80, 0.3);
-}
+                <div class="card food">
+                    <div class="time">19:00</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-utensils"></i> 矢場とん 味噌豬排</h3>
+                            <div class="tags"><span class="tag reservation">GMAP預約 19:00</span> <span class="tag must-eat">名古屋名物</span></div>
+                            <p>晚餐：名古屋車站周遭逛街後</p>
+                            <div class="guide-tip">🥩 必點：**鐵板味噌豬排** (ロースとんかつ)，感受醬汁淋上去的聲音！</div>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Yabaton+Nagoya+Station" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
+                        </div>
+                    </div>
+                    <div class="image-preview"></div>
+                </div>
+            </div>
 
-/* Content Area */
-.day-content {
-    display: none;
-    padding: 0 15px;
-    animation: fadeIn 0.3s ease;
-}
+            <div id="day3" class="day-content">
+                <div class="date-header">12/20 (六) 名古屋市區遊・花火大會</div>
+                
+                <div class="weather-card">
+                    <div class="weather-icon"><i class="fas fa-cloud"></i></div>
+                    <div class="weather-info">
+                        <h3>7°C / 5°C ｜ 傍晚轉涼</h3>
+                        <p>天氣：陰天，空氣乾燥。建議：晚上看花火要帶**暖暖包、帽子**。</p>
+                    </div>
+                </div>
 
-.day-content.active {
-    display: block;
-}
+                <div class="card spot">
+                    <div class="time">10:15</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-landmark"></i> 名古屋城</h3>
+                            <p>日本三大名城之一 (櫻通線→名城線)</p>
+                            <div class="guide-tip">👀 必看：天守閣屋頂上的黃金海豚 **金鯱**。</div>
+                        </div>
+                    </div>
+                    <div class="image-preview">[attachment_3](attachment)</div>
+                </div>
 
-.date-header {
-    margin: 10px 0 20px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--primary);
-    border-left: 4px solid var(--accent);
-    padding-left: 10px;
-}
+                <div class="card food">
+                    <div class="time">13:30</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-fish"></i> 熱田蓬萊軒 神宮店</h3>
+                            <div class="tags"><span class="tag reservation">電話預約 13:30</span> <span class="tag must-eat">鰻魚三吃 (Hitsumabushi)</span></div>
+                            <p>逛熱田神宮前用餐。</p>
+                            <div class="guide-tip">🥢 必學吃法：1.原味 2.加蔥、海苔、芥末 3.茶泡飯。</div>
+                            <div class="souvenir-tip">⛩️ 必買：熱田神宮的**御守**（特別是開運、交通）。</div>
+                        </div>
+                    </div>
+                    <div class="image-preview">[attachment_4](attachment)</div>
+                </div>
 
-/* Cards */
-.card {
-    background: var(--card-bg);
-    border-radius: var(--border-radius);
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: var(--shadow);
-    display: flex;
-    gap: 15px;
-    position: relative;
-    border-left: 4px solid transparent;
-    flex-direction: column; /* 將內容垂直排列 */
-}
+                <div class="card spot">
+                    <div class="time">18:30</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-fire"></i> ISOGAI 花火劇場</h3>
+                            <p>名古屋港花火大會 (請提早佔位)</p>
+                            <div class="tags"><span class="tag warning">極度保暖準備</span></div>
+                        </div>
+                    </div>
+                    <div class="image-preview">[attachment_5](attachment)</div>
+                </div>
+            </div>
 
-/* Card Types Colors */
-.card.transport { border-left-color: #3498db; }
-.card.spot { border-left-color: #e67e22; }
-.card.food { border-left-color: #e74c3c; }
-.card.hotel { border-left-color: #9b59b6; }
+            <div id="day4" class="day-content">
+                <div class="date-header">12/21 (日) 高山・合掌村一日團</div>
+                
+                <div class="weather-card">
+                    <div class="weather-icon"><i class="fas fa-snowflake"></i></div>
+                    <div class="weather-info">
+                        <h3>4°C / -2°C ｜ 山區有雪，體感極凍</h3>
+                        <p>天氣：可能下雪/結冰。建議：**雪靴、防水外套、兩層手套、毛帽**。</p>
+                    </div>
+                </div>
 
-.time {
-    font-weight: bold;
-    color: var(--primary);
-    font-family: monospace;
-    font-size: 1rem;
-    min-width: 50px;
-    align-self: flex-start;
-}
-
-.details-wrapper {
-    display: flex;
-    gap: 15px;
-}
-
-.details {
-    flex: 1;
-}
-
-.details h3 {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    color: var(--text);
-}
-
-.details p {
-    font-size: 0.9rem;
-    color: var(--sub-text);
-    margin-bottom: 8px;
-    line-height: 1.4;
-}
-
-/* Image Preview Placeholder (NEW) */
-.image-preview {
-    width: 100%;
-    height: 100px; /* 預設高度 */
-    background: #eee;
-    border-radius: 8px;
-    margin-top: 10px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    color: #999;
-}
-.image-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Guide Tips & Souvenirs (NEW COLORS) */
-.guide-tip, .souvenir-tip {
-    padding: 8px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    margin-top: 8px;
-    line-height: 1.4;
-}
-
-.guide-tip {
-    background-color: #fff8e1; /* 黃色 */
-    color: #8d6e63;
-}
-.souvenir-tip {
-    background-color: #e8f5e9; /* 綠色 */
-    color: #2e7d32;
-}
-
-
-/* Tags */
-.tags {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-    margin-top: 5px;
-}
-
-.tag {
-    font-size: 0.7rem;
-    padding: 2px 8px;
-    border-radius: 4px;
-    color: white;
-}
-
-.tag.reservation { background-color: #e74c3c; }
-.tag.must-eat { background-color: #f39c12; }
-.tag.warning { background-color: #7f8c8d; }
-
-.map-btn {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 0.8rem;
-    color: var(--primary);
-    text-decoration: none;
-    border: 1px solid var(--primary);
-    padding: 4px 10px;
-    border-radius: 20px;
-    align-self: flex-start;
-}
-
-/* Info Section (Tools) */
-.view-hidden { display: none; }
-.info-view { padding: 15px; }
-
-.info-section { 
-    padding: 15px; 
-    margin-bottom: 20px;
-    background: var(--card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-}
-.info-section h2 { 
-    font-size: 1.1rem; 
-    margin-bottom: 10px; 
-    color: var(--primary); 
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
-}
-.info-card p { margin-bottom: 8px; font-size: 0.95rem; }
-
-/* Currency Converter */
-.currency-converter {
-    text-align: center;
-}
-.currency-converter input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1.2rem;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-#twd-output { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
-
-
-/* Bottom Nav */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: white;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-    z-index: 200;
-}
-
-.nav-btn {
-    border: none;
-    background: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #999;
-    font-size: 0.8rem;
-    cursor: pointer;
-}
-
-.nav-btn i { font-size: 1.2rem; margin-bottom: 4px; }
-.nav-btn.active { color: var(--primary); }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-
-
-    <script src="script.js"></script>
-
+                <div class="card transport">
+                    <div class="time">08:00</div>
+                    <div class="details-wrapper">
+                        <div class="details">
+                            <h3><i class="fas fa-bus"></i> 集合出發</h3>
+                            <p>集合地點：名古屋站太閣通口西派出所前</p>
+                            <div class="tags"><span class="tag warning">準時出發，逾時不候</span></div>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Nagoya+Station+Taikodori+Exit" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
+                        </div>
