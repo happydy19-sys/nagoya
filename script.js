@@ -12,7 +12,7 @@ const hardcodedDefaultRate = 4.5;
 // 應用程式將使用的匯率 (初始化時從本地儲存載入)
 let currentExchangeRate = hardcodedDefaultRate;
 
-// 住宿清單 - 包含詳細資訊
+// 住宿清單 - 包含詳細資訊 (已更新為可用的 Google 地圖連結)
 const accommodations = [
     {
         name: "名古屋站前大和roynet飯店",
@@ -23,10 +23,11 @@ const accommodations = [
         checkOut: "10:00",
         notes: "近名古屋站櫻通口，交通便利。**早餐很推薦**。",
         nearby: [
+            // 這些 'mapLink' 仍是站位符，建議手動填寫附近的超商地址
             { name: "7-Eleven (近飯店出口)", distance: "步行 1 分鐘", mapLink: "https://maps.app.goo.gl/abcdefg1" },
             { name: "Lawson (站前地下街)", distance: "步行 3 分鐘", mapLink: "https://maps.app.goo.gl/abcdefg2" }
         ],
-        mapUrl: "https://maps.app.goo.gl/S4p7xH7D3L3Vw" 
+        mapUrl: "https://www.google.com/maps/place/〒450-0002+愛知県名古屋市中村区名駅4-25-10" 
     },
     {
         name: "金星Neo飯店 (Hotel Kinjo Neo)",
@@ -39,7 +40,7 @@ const accommodations = [
         nearby: [
             { name: "FamilyMart (鶴舞公園前)", distance: "步行 2 分鐘", mapLink: "https://maps.app.goo.gl/abcdefg3" }
         ],
-        mapUrl: "https://maps.app.goo.gl/X9yWvY7D3L3Vw" 
+        mapUrl: "https://www.google.com/maps/place/〒460-0012+愛知県名古屋市中区千代田1-3-11" 
     },
     {
         name: "Dormy Inn PREMIUM Sakae",
@@ -53,7 +54,7 @@ const accommodations = [
             { name: "7-Eleven (飯店旁)", distance: "步行 1 分鐘", mapLink: "https://maps.app.goo.gl/abcdefg4" },
             { name: "松坂屋百貨", distance: "步行 5 分鐘", mapLink: "https://maps.app.goo.gl/abcdefg5" }
         ],
-        mapUrl: "https://maps.app.goo.gl/D7eS9Y7D3L3Vw" 
+        mapUrl: "https://www.google.com/maps/place/〒460-0008+愛知県名古屋市中区栄3-25-20" 
     }
 ];
 
