@@ -237,11 +237,11 @@ function updateExchangeRateDisplay() {
 
 
 // =========================================================================
-// 資訊頁面函式：住宿清單
+// 資訊頁面函式：住宿清單 (已優化結構)
 // =========================================================================
 
 /**
- * 渲染詳細住宿清單
+ * 渲染詳細住宿清單 (結構優化，分類清晰)
  */
 function renderAccommodations() {
     const container = document.getElementById('accommodation-detail-container'); 
@@ -254,46 +254,53 @@ function renderAccommodations() {
         // 鄰近超商/設施的 HTML
         let nearbyHtml = hotel.nearby.map(place => `
             <li>
-                <i class="fas fa-store-alt"></i> ${place.name} 
+                <i class="fas fa-store-alt" style="color:#007bff;"></i> ${place.name} 
                 (<span style="font-weight: bold;">${place.distance}</span>) 
-                <a href="${place.mapLink}" target="_blank" style="color: #007bff; text-decoration: none;">
-                    <i class="fas fa-map-marker-alt"></i> (地圖)
+                <a href="${place.mapLink}" target="_blank" style="color: #007bff; text-decoration: none; font-size: 0.9em;">
+                    <i class="fas fa-map-marker-alt"></i> 地圖
                 </a>
             </li>
         `).join('');
 
         const hotelCard = document.createElement('div');
-        hotelCard.className = 'info-card hotel-card'; // 使用 info-card 保持風格
+        hotelCard.className = 'info-card hotel-card'; 
+        hotelCard.style.padding = '20px'; // 增加內邊距
         hotelCard.innerHTML = `
-            <h2><i class="fas fa-hotel"></i> ${hotel.name}</h2>
-            <p style="font-size: 0.9em; color: #666; margin-top: -5px;">適用行程: ${hotel.day}</p>
+            <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+                <i class="fas fa-hotel" style="color: #343a40;"></i> ${hotel.name}
+            </h2>
+            <p style="font-size: 0.9em; color: #6c757d; margin-top: -5px; font-weight: bold;">適用行程: ${hotel.day}</p>
 
-            <div class="info-group">
-                <h3><i class="fas fa-map-marker-alt"></i> 地址與地圖</h3>
-                <p>${hotel.address}</p>
-                <p><strong>電話:</strong> ${hotel.phone}</p>
-                <a href="${hotel.mapUrl}" target="_blank" class="map-btn" style="display: block; width: 100%; text-align: center; margin-top: 10px;">
-                    <i class="fas fa-route"></i> 導航至此飯店
-                </a>
+            <div class="key-info-section" style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; border: 1px solid #eee; padding: 10px; border-radius: 5px;">
+                
+                <div class="info-block" style="flex: 1 1 45%; min-width: 150px;">
+                    <h3 style="font-size: 1em; color: #dc3545; margin: 0 0 5px 0;"><i class="fas fa-clock"></i> 時間資訊</h3>
+                    <p style="margin: 0;"><strong>入住 (Check-in):</strong> <span style="font-size: 1.1em;">${hotel.checkIn}</span></p>
+                    <p style="margin: 0;"><strong>退房 (Check-out):</strong> <span style="font-size: 1.1em;">${hotel.checkOut}</span></p>
+                </div>
+
+                <div class="info-block" style="flex: 1 1 45%; min-width: 150px;">
+                    <h3 style="font-size: 1em; color: #28a745; margin: 0 0 5px 0;"><i class="fas fa-map-marked-alt"></i> 地址與電話</h3>
+                    <p style="margin: 0; font-size: 0.9em;">${hotel.address}</p>
+                    <p style="margin: 0; font-size: 0.9em;"><strong>電話:</strong> ${hotel.phone}</p>
+                </div>
             </div>
 
-            <div class="info-group">
-                <h3><i class="fas fa-calendar-alt"></i> 入住/退房時間</h3>
-                <p><strong>入住 (Check-in):</strong> ${hotel.checkIn}</p>
-                <p><strong>退房 (Check-out):</strong> ${hotel.checkOut}</p>
+            <div class="info-group" style="margin-bottom: 15px; background-color: #f8f9fa; padding: 10px; border-radius: 5px;">
+                <h3 style="font-size: 1em; color: #ffc107; margin: 0 0 5px 0;"><i class="fas fa-lightbulb"></i> 備註與特色</h3>
+                <p style="margin: 0;">${hotel.notes}</p>
             </div>
             
-            <div class="info-group">
-                <h3><i class="fas fa-clipboard-list"></i> 備註與特色</h3>
-                <p>${hotel.notes}</p>
-            </div>
-
-            <div class="info-group">
-                <h3><i class="fas fa-store-alt"></i> 鄰近設施</h3>
-                <ul class="nearby-list" style="list-style-type: none; padding-left: 0;">
+            <div class="info-group" style="margin-bottom: 15px;">
+                <h3 style="font-size: 1em; color: #007bff; margin: 0 0 5px 0;"><i class="fas fa-walking"></i> 鄰近設施 (超商/景點)</h3>
+                <ul class="nearby-list" style="list-style-type: none; padding-left: 0; margin: 0;">
                     ${nearbyHtml}
                 </ul>
             </div>
+
+            <a href="${hotel.mapUrl}" target="_blank" class="map-btn" style="display: block; width: 100%; text-align: center; margin-top: 15px; background-color: #007bff; color: white; padding: 10px; text-decoration: none; border-radius: 5px;">
+                <i class="fas fa-route"></i> **導航至此飯店** (Google 地圖)
+            </a>
             
         `;
         container.appendChild(hotelCard);
