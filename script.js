@@ -12,7 +12,8 @@ const hardcodedDefaultRate = 4.5;
 // 應用程式將使用的匯率 (初始化時從本地儲存載入)
 let currentExchangeRate = hardcodedDefaultRate;
 
-// 住宿清單 - 包含詳細資訊 (已更新為可用的 Google 地圖連結)
+// 住宿清單 - 包含詳細資訊 (已更新為可用的 Google 地圖連結和圖片路徑)
+// 請確保您的圖片檔案放在 project/images/ 資料夾中，且名稱相符。
 const accommodations = [
     {
         name: "名古屋站前大和roynet飯店",
@@ -23,11 +24,11 @@ const accommodations = [
         checkOut: "10:00",
         notes: "近名古屋站櫻通口，交通便利。**早餐很推薦**。",
         nearby: [
-            // 這些 'mapLink' 仍是站位符，建議手動填寫附近的超商地址
             { name: "7-Eleven (近飯店出口)", distance: "步行 1 分鐘", mapLink: "https://maps.app.goo.gl/abcdefg1" },
             { name: "Lawson (站前地下街)", distance: "步行 3 分鐘", mapLink: "https://maps.app.goo.gl/abcdefg2" }
         ],
-        mapUrl: "https://www.google.com/maps/place/〒450-0002+愛知県名古屋市中村区名駅4-25-10" 
+        mapUrl: "https://www.google.com/maps/place/〒450-0002+愛知県名古屋市中村区名駅4-25-10",
+        imageUrl: 'images/nagoya_roynet.jpg' 
     },
     {
         name: "金星Neo飯店 (Hotel Kinjo Neo)",
@@ -40,7 +41,8 @@ const accommodations = [
         nearby: [
             { name: "FamilyMart (鶴舞公園前)", distance: "步行 2 分鐘", mapLink: "https://maps.app.goo.gl/abcdefg3" }
         ],
-        mapUrl: "https://www.google.com/maps/place/〒460-0012+愛知県名古屋市中区千代田1-3-11" 
+        mapUrl: "https://www.google.com/maps/place/〒460-0012+愛知県名古屋市中区千代田1-3-11",
+        imageUrl: 'images/kinjo_neo.jpg' 
     },
     {
         name: "Dormy Inn PREMIUM Sakae",
@@ -54,7 +56,8 @@ const accommodations = [
             { name: "7-Eleven (飯店旁)", distance: "步行 1 分鐘", mapLink: "https://maps.app.goo.gl/abcdefg4" },
             { name: "松坂屋百貨", distance: "步行 5 分鐘", mapLink: "https://maps.app.goo.gl/abcdefg5" }
         ],
-        mapUrl: "https://www.google.com/maps/place/〒460-0008+愛知県名古屋市中区栄3-25-20" 
+        mapUrl: "https://www.google.com/maps/place/〒460-0008+愛知県名古屋市中区栄3-25-20",
+        imageUrl: 'images/dormy_sakae.jpg' 
     }
 ];
 
@@ -237,11 +240,11 @@ function updateExchangeRateDisplay() {
 
 
 // =========================================================================
-// 資訊頁面函式：住宿清單 (已優化結構)
+// 資訊頁面函式：住宿清單
 // =========================================================================
 
 /**
- * 渲染詳細住宿清單 (結構優化，分類清晰)
+ * 渲染詳細住宿清單 (結構優化，分類清晰，加入圖片)
  */
 function renderAccommodations() {
     const container = document.getElementById('accommodation-detail-container'); 
@@ -264,44 +267,47 @@ function renderAccommodations() {
 
         const hotelCard = document.createElement('div');
         hotelCard.className = 'info-card hotel-card'; 
-        hotelCard.style.padding = '20px'; // 增加內邊距
+        hotelCard.style.padding = '0'; // 圖片會佔據邊緣，所以將 padding 設為 0
         hotelCard.innerHTML = `
-            <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
-                <i class="fas fa-hotel" style="color: #343a40;"></i> ${hotel.name}
-            </h2>
-            <p style="font-size: 0.9em; color: #6c757d; margin-top: -5px; font-weight: bold;">適用行程: ${hotel.day}</p>
+            ${hotel.imageUrl ? `<img src="${hotel.imageUrl}" alt="${hotel.name}" style="width: 100%; height: 200px; object-fit: cover; border-top-left-radius: 8px; border-top-right-radius: 8px;">` : ''}
 
-            <div class="key-info-section" style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; border: 1px solid #eee; padding: 10px; border-radius: 5px;">
+            <div style="padding: 20px;">
+                <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+                    <i class="fas fa-hotel" style="color: #343a40;"></i> ${hotel.name}
+                </h2>
+                <p style="font-size: 0.9em; color: #6c757d; margin-top: -5px; font-weight: bold;">適用行程: ${hotel.day}</p>
+
+                <div class="key-info-section" style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; border: 1px solid #eee; padding: 10px; border-radius: 5px;">
+                    
+                    <div class="info-block" style="flex: 1 1 45%; min-width: 150px;">
+                        <h3 style="font-size: 1em; color: #dc3545; margin: 0 0 5px 0;"><i class="fas fa-clock"></i> 時間資訊</h3>
+                        <p style="margin: 0;"><strong>入住 (Check-in):</strong> <span style="font-size: 1.1em;">${hotel.checkIn}</span></p>
+                        <p style="margin: 0;"><strong>退房 (Check-out):</strong> <span style="font-size: 1.1em;">${hotel.checkOut}</span></p>
+                    </div>
+
+                    <div class="info-block" style="flex: 1 1 45%; min-width: 150px;">
+                        <h3 style="font-size: 1em; color: #28a745; margin: 0 0 5px 0;"><i class="fas fa-map-marked-alt"></i> 地址與電話</h3>
+                        <p style="margin: 0; font-size: 0.9em;">${hotel.address}</p>
+                        <p style="margin: 0; font-size: 0.9em;"><strong>電話:</strong> ${hotel.phone}</p>
+                    </div>
+                </div>
+
+                <div class="info-group" style="margin-bottom: 15px; background-color: #f8f9fa; padding: 10px; border-radius: 5px;">
+                    <h3 style="font-size: 1em; color: #ffc107; margin: 0 0 5px 0;"><i class="fas fa-lightbulb"></i> 備註與特色</h3>
+                    <p style="margin: 0;">${hotel.notes}</p>
+                </div>
                 
-                <div class="info-block" style="flex: 1 1 45%; min-width: 150px;">
-                    <h3 style="font-size: 1em; color: #dc3545; margin: 0 0 5px 0;"><i class="fas fa-clock"></i> 時間資訊</h3>
-                    <p style="margin: 0;"><strong>入住 (Check-in):</strong> <span style="font-size: 1.1em;">${hotel.checkIn}</span></p>
-                    <p style="margin: 0;"><strong>退房 (Check-out):</strong> <span style="font-size: 1.1em;">${hotel.checkOut}</span></p>
+                <div class="info-group" style="margin-bottom: 15px;">
+                    <h3 style="font-size: 1em; color: #007bff; margin: 0 0 5px 0;"><i class="fas fa-walking"></i> 鄰近設施 (超商/景點)</h3>
+                    <ul class="nearby-list" style="list-style-type: none; padding-left: 0; margin: 0;">
+                        ${nearbyHtml}
+                    </ul>
                 </div>
 
-                <div class="info-block" style="flex: 1 1 45%; min-width: 150px;">
-                    <h3 style="font-size: 1em; color: #28a745; margin: 0 0 5px 0;"><i class="fas fa-map-marked-alt"></i> 地址與電話</h3>
-                    <p style="margin: 0; font-size: 0.9em;">${hotel.address}</p>
-                    <p style="margin: 0; font-size: 0.9em;"><strong>電話:</strong> ${hotel.phone}</p>
-                </div>
+                <a href="${hotel.mapUrl}" target="_blank" class="map-btn" style="display: block; width: 100%; text-align: center; margin-top: 15px; background-color: #007bff; color: white; padding: 10px; text-decoration: none; border-radius: 5px;">
+                    <i class="fas fa-route"></i> **導航至此飯店** (Google 地圖)
+                </a>
             </div>
-
-            <div class="info-group" style="margin-bottom: 15px; background-color: #f8f9fa; padding: 10px; border-radius: 5px;">
-                <h3 style="font-size: 1em; color: #ffc107; margin: 0 0 5px 0;"><i class="fas fa-lightbulb"></i> 備註與特色</h3>
-                <p style="margin: 0;">${hotel.notes}</p>
-            </div>
-            
-            <div class="info-group" style="margin-bottom: 15px;">
-                <h3 style="font-size: 1em; color: #007bff; margin: 0 0 5px 0;"><i class="fas fa-walking"></i> 鄰近設施 (超商/景點)</h3>
-                <ul class="nearby-list" style="list-style-type: none; padding-left: 0; margin: 0;">
-                    ${nearbyHtml}
-                </ul>
-            </div>
-
-            <a href="${hotel.mapUrl}" target="_blank" class="map-btn" style="display: block; width: 100%; text-align: center; margin-top: 15px; background-color: #007bff; color: white; padding: 10px; text-decoration: none; border-radius: 5px;">
-                <i class="fas fa-route"></i> **導航至此飯店** (Google 地圖)
-            </a>
-            
         `;
         container.appendChild(hotelCard);
     });
