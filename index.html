@@ -2,321 +2,181 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>名古屋冬日之旅</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>旅遊行程小幫手 (名古屋)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <header class="app-header">
-        <h1>名古屋冬日之旅 (12/18 - 12/22)</h1>
-    </header>
-
-    <main id="main-content">
-        <div id="itinerary-view" class="active-view">
+    <div id="app-container">
+        
+        <header>
+            <h1><i class="fas fa-suitcase-rolling"></i> 名古屋五日自由行</h1>
             <div class="day-tabs">
-                <button class="day-btn active" onclick="showDay('day1')">18<br>Thu</button>
-                <button class="day-btn" onclick="showDay('day2')">19<br>Fri</button>
-                <button class="day-btn" onclick="showDay('day3')">20<br>Sat</button>
-                <button class="day-btn" onclick="showDay('day4')">21<br>Sun</button>
-                <button class="day-btn" onclick="showDay('day5')">22<br>Mon</button>
+                <button class="day-btn active" onclick="showDay('day1')">Day 1</button>
+                <button class="day-btn" onclick="showDay('day2')">Day 2</button>
+                <button class="day-btn" onclick="showDay('day3')">Day 3</button>
+                <button class="day-btn" onclick="showDay('day4')">Day 4</button>
+                <button class="day-btn" onclick="showDay('day5')">Day 5</button>
             </div>
+        </header>
 
-            <div id="day1" class="day-content active">
-                <div class="date-header">12/18 (四) 犬山城半日遊 & 榮夜景</div>
+        <main id="main-content">
+
+            <div id="itinerary-view" class="active-view">
                 
-                <div class="weather-card">
-                    <div class="weather-icon"><i class="fas fa-sun"></i></div>
-                    <div class="weather-info">
-                        <h3>8°C / 4°C ｜ 名古屋市</h3>
-                        <p>天氣：晴朗有風。建議：**厚羊毛大衣**、發熱衣、圍巾、手套。</p>
+                <div id="day1" class="day-content active">
+                    <h2><i class="fas fa-plane"></i> 桃園機場 (TPE) ⇌ 名古屋機場 (NGO)</h2>
+                    
+                    <div class="activity">
+                        <h3>14:00 抵達名古屋站，入住飯店</h3>
+                        <p>確認地鐵一日券購買地點，熟悉周邊環境。</p>
                     </div>
-                </div>
-                
-                <div class="card transport">
-                    <div class="time">02:55</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-plane"></i> 樂桃 MM722 出發</h3>
-                            <p>台北 TPE ➝ 名古屋中部國際機場 NGO</p>
-                            <div class="tags"><span class="tag warning">預留停車時間</span></div>
-                        </div>
+                    
+                    <div class="activity">
+                        <h3>16:30 熱田神宮</h3>
+                        <p>日本最古老的神社之一，周圍環境清幽，步行可達。</p>
+                    </div>
+                    
+                    <div class="activity">
+                        <h3>19:00 名古屋飯：味增豬排（矢場とん）</h3>
+                        <p>推薦：鐵板味噌豬排。本店排隊人潮多，建議找分店。</p>
+                    </div>
+
+                    <div class="activity">
+                        <h3>21:00 Bic Camera/驚安殿堂</h3>
+                        <p>名古屋站前的 Bic Camera 購物，或前往榮商圈的驚安殿堂。</p>
                     </div>
                 </div>
 
-                <div class="card food">
-                    <div class="time">09:00</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-coffee"></i> Tsubame Bread & Milk</h3>
-                            <p>名古屋必吃早餐店 (先抽號碼牌)</p>
-                            <div class="guide-tip">💡 必點：紅豆奶油吐司、霜淇淋厚片。</div>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Tsubame+Bread+%26+Milk+Nagoya" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
-                        </div>
+                <div id="day2" class="day-content">
+                    <h2><i class="fas fa-route"></i> Day 2 - 名古屋城與市區散策</h2>
+                    
+                    <div class="activity">
+                        <h3>09:00 名古屋城</h3>
+                        <p>必看：本丸御殿復原後的精緻建築。注意開城時間。</p>
                     </div>
-                    <div class="image-preview">[attachment_0](attachment)</div>
-                </div>
-
-                <div class="card spot">
-                    <div class="time">11:00</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-torii-gate"></i> 犬山城區散策</h3>
-                            <p>犬山城 (日本最古老天守閣) / 三光稻荷神社 / 城下町</p>
-                            <div class="guide-tip">📸 必看：**三光稻荷神社**的粉紅愛心繪馬。</div>
-                            <div class="tags"><span class="tag must-eat">午餐: Seimen Misaku (雞醬油拉麵)</span></div>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Inuyama+Castle" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
-                        </div>
+                    
+                    <div class="activity">
+                        <h3>12:00 購物與午餐：大須商店街</h3>
+                        <p>充滿活力和傳統氣氛的商店街，有許多小吃和古著店。</p>
                     </div>
-                    <div class="image-preview"></div>
-                </div>
-
-                <div class="card food">
-                    <div class="time">19:00</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-utensils"></i> 月島文字燒 & HARBS</h3>
-                            <div class="tags"><span class="tag reservation">月島文字燒: 電話預約 19:00</span></div>
-                            <p>榮區晚餐 + **HARBS 榮本店** (甜點)</p>
-                            <div class="guide-tip">🍰 HARBS 必點：**水果千層蛋糕**。</div>
-                        </div>
+                    
+                    <div class="activity">
+                        <h3>15:00 綠洲 21 (Oasis 21) 與名古屋電視塔</h3>
+                        <p>Oasis 21 的水之宇宙船和電視塔是榮地區的標誌性地標。</p>
                     </div>
-                    <div class="image-preview">[attachment_1](attachment)</div>
-                </div>
-            </div>
 
-            <div id="day2" class="day-content">
-                <div class="date-header">12/19 (五) 吉卜力公園一日遊</div>
-                
-                <div class="weather-card">
-                    <div class="weather-icon"><i class="fas fa-cloud-sun"></i></div>
-                    <div class="weather-info">
-                        <h3>9°C / 3°C ｜ 長久手市 (較市區冷)</h3>
-                        <p>天氣：多雲。建議：保暖**絨毛背心**或**輕羽絨**加在大衣內。</p>
+                    <div class="activity">
+                        <h3>18:30 晚餐：蓬萊軒鰻魚飯 (神宮店)</h3>
+                        <p>名古屋必吃鰻魚飯三吃 (ひつまぶし)。建議早點去排隊。</p>
                     </div>
                 </div>
                 
-                <div class="card spot">
-                    <div class="time">08:00</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-tree"></i> 吉卜力公園</h3>
-                            <p>全日遊玩 (大倉庫、青春之丘、Dondoko之森)</p>
-                            <div class="guide-tip">⚠️ 攻略：票券時間嚴格，請務必準時。**吉卜力大倉庫**需預留 3 小時以上。</div>
-                            <div class="souvenir-tip">🎁 必買：大倉庫周邊商店限定的**龍貓、無臉男商品**。</div>
-                        </div>
+                <div id="day3" class="day-content">
+                    <h2><i class="fas fa-bus"></i> Day 3 - 郊區體驗：犬山城下町</h2>
+                    
+                    <div class="activity">
+                        <h3>09:00 前往犬山站</h3>
+                        <p>搭乘名古屋鐵道 (名鐵) 犬山線，約 30 分鐘。</p>
                     </div>
-                    <div class="image-preview">[attachment_2](attachment)</div>
+                    
+                    <div class="activity">
+                        <h3>10:30 犬山城與三光稻荷神社</h3>
+                        <p>犬山城是日本國寶天守之一，地勢高聳，視野極佳。三光稻荷神社有可愛的粉色愛心繪馬。</p>
+                    </div>
+                    
+                    <div class="activity">
+                        <h3>13:00 犬山城下町午餐與散步</h3>
+                        <p>在古老的城下町享受特色小吃（如戀愛糰子）和購物。</p>
+                    </div>
+
+                    <div class="activity">
+                        <h3>17:00 晚餐：名古屋車站周邊</h3>
+                        <p>可嘗試山本屋總本家的味噌煮烏龍麵。</p>
+                    </div>
                 </div>
 
-                <div class="card food">
-                    <div class="time">19:00</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-utensils"></i> 矢場とん 味噌豬排</h3>
-                            <div class="tags"><span class="tag reservation">GMAP預約 19:00</span> <span class="tag must-eat">名古屋名物</span></div>
-                            <p>晚餐：名古屋車站周遭逛街後</p>
-                            <div class="guide-tip">🥩 必點：**鐵板味噌豬排** (ロースとんかつ)，感受醬汁淋上去的聲音！</div>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Yabaton+Nagoya+Station" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
-                        </div>
+                <div id="day4" class="day-content">
+                    <h2><i class="fas fa-car"></i> Day 4 - 樂高樂園或長島溫泉</h2>
+                    
+                    <div class="activity">
+                        <h3>全日行程：</h3>
+                        <p>**選擇 A：** 名古屋樂高樂園 (LEGOLAND Japan Resort)。適合有小孩的家庭。</p>
+                        <p>**選擇 B：** 長島溫泉樂園 (Nagashima Spa Land)。包含雲霄飛車、Outlet 購物和溫泉 (湯あみの島)。</p>
                     </div>
-                    <div class="image-preview"></div>
+                    
+                    <div class="activity">
+                        <h3>交通備註：</h3>
+                        <p>樂高樂園：搭乘青波線 (Aonami Line) 至金城埠頭站。</p>
+                        <p>長島溫泉：在名鐵巴士中心搭乘直達巴士。</p>
+                    </div>
+                    
+                    <div class="activity">
+                        <h3>19:00 晚餐：榮商圈</h3>
+                        <p>在 Dormy Inn 附近尋找居酒屋或特色料理。</p>
+                    </div>
                 </div>
-            </div>
 
-            <div id="day3" class="day-content">
-                <div class="date-header">12/20 (六) 名古屋市區遊・花火大會</div>
+                <div id="day5" class="day-content">
+                    <h2><i class="fas fa-shopping-bag"></i> Day 5 - 最後購物與返程</h2>
+                    
+                    <div class="activity">
+                        <h3>09:00 最後購物</h3>
+                        <p>在飯店附近或名古屋站周邊進行最後採購（手信、藥妝）。</p>
+                    </div>
+                    
+                    <div class="activity">
+                        <h3>11:00 飯店退房</h3>
+                        <p>請務必準時退房，若需寄放行李請與櫃檯確認。</p>
+                    </div>
+                    
+                    <div class="activity">
+                        <h3>13:00 前往中部國際機場 (NGO)</h3>
+                        <p>搭乘名鐵特急列車前往機場。</p>
+                    </div>
+
+                    <div class="activity">
+                        <h3>16:30 登機</h3>
+                        <p>確認登機時間與登機門。</p>
+                    </div>
+                </div>
                 
-                <div class="weather-card">
-                    <div class="weather-icon"><i class="fas fa-cloud"></i></div>
-                    <div class="weather-info">
-                        <h3>7°C / 5°C ｜ 傍晚轉涼</h3>
-                        <p>天氣：陰天，空氣乾燥。建議：晚上看花火要帶**暖暖包、帽子**。</p>
-                    </div>
-                </div>
-
-                <div class="card spot">
-                    <div class="time">10:15</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-landmark"></i> 名古屋城</h3>
-                            <p>日本三大名城之一 (櫻通線→名城線)</p>
-                            <div class="guide-tip">👀 必看：天守閣屋頂上的黃金海豚 **金鯱**。</div>
-                        </div>
-                    </div>
-                    <div class="image-preview">[attachment_3](attachment)</div>
-                </div>
-
-                <div class="card food">
-                    <div class="time">13:30</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-fish"></i> 熱田蓬萊軒 神宮店</h3>
-                            <div class="tags"><span class="tag reservation">電話預約 13:30</span> <span class="tag must-eat">鰻魚三吃 (Hitsumabushi)</span></div>
-                            <p>逛熱田神宮前用餐。</p>
-                            <div class="guide-tip">🥢 必學吃法：1.原味 2.加蔥、海苔、芥末 3.茶泡飯。</div>
-                            <div class="souvenir-tip">⛩️ 必買：熱田神宮的**御守**（特別是開運、交通）。</div>
-                        </div>
-                    </div>
-                    <div class="image-preview">[attachment_4](attachment)</div>
-                </div>
-
-                <div class="card spot">
-                    <div class="time">18:30</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-fire"></i> ISOGAI 花火劇場</h3>
-                            <p>名古屋港花火大會 (請提早佔位)</p>
-                            <div class="tags"><span class="tag warning">極度保暖準備</span></div>
-                        </div>
-                    </div>
-                    <div class="image-preview">[attachment_5](attachment)</div>
-                </div>
-            </div>
-
-            <div id="day4" class="day-content">
-                <div class="date-header">12/21 (日) 高山・合掌村一日團</div>
+            </div> <div id="info-view" class="view-hidden">
                 
-                <div class="weather-card">
-                    <div class="weather-icon"><i class="fas fa-snowflake"></i></div>
-                    <div class="weather-info">
-                        <h3>4°C / -2°C ｜ 山區有雪，體感極凍</h3>
-                        <p>天氣：可能下雪/結冰。建議：**雪靴、防水外套、兩層手套、毛帽**。</p>
-                    </div>
-                </div>
-
-                <div class="card transport">
-                    <div class="time">08:00</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-bus"></i> 集合出發</h3>
-                            <p>集合地點：名古屋站太閣通口西派出所前</p>
-                            <div class="tags"><span class="tag warning">準時出發，逾時不候</span></div>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Nagoya+Station+Taikodori+Exit" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card spot">
-                    <div class="time">08:30</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-mountain"></i> 高山 + 合掌村</h3>
-                            <p>飛驒高山老街、白川鄉合掌造</p>
-                            <div class="guide-tip">🍢 必吃：**飛驒牛握壽司** (在高山老街)、**五平餅**。</div>
-                            <div class="souvenir-tip">🎁 必買：飛驒地區傳統的**猴寶寶玩偶** (Sarubobo) 保平安。</div>
-                        </div>
-                    </div>
-                    <div class="image-preview"></div>
-                </div>
-
-                <div class="card hotel">
-                    <div class="time">20:00</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-hot-tub"></i> Dormy Inn PREMIUM</h3>
-                            <p>榮區 / 免費宵夜拉麵 + 溫泉</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="day5" class="day-content">
-                <div class="date-header">12/22 (一) 大須・常滑・機場返台</div>
-                
-                <div class="weather-card">
-                    <div class="weather-icon"><i class="fas fa-sun"></i></div>
-                    <div class="weather-info">
-                        <h3>10°C / 4°C ｜ 出境日</h3>
-                        <p>天氣：晴朗。建議：穿脫方便的衣物，準備好托運行李。</p>
-                    </div>
-                </div>
-
-                <div class="card spot">
-                    <div class="time">10:00</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-store"></i> 大須商店街</h3>
-                            <p>大須觀音 / 水曜日的愛麗絲 / C-pla / 三輪神社</p>
-                            <div class="tags"><span class="tag must-eat">午餐: 大須の森咖啡廳 (IG預約13:30)</span></div>
-                            <div class="souvenir-tip">🎁 必買：商店街的各種**扭蛋**、**藥妝**。</div>
-                        </div>
-                    </div>
-                    <div class="image-preview"></div>
-                </div>
-
-                <div class="card spot">
-                    <div class="time">16:30</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-shopping-bag"></i> Aeon Mall 常滑店</h3>
-                            <p>招財貓故鄉、機場前的最後採買</p>
-                            <div class="guide-tip">✈️ 離機場只有一站名鐵車程，極度方便！</div>
-                        </div>
-                    </div>
-                    <div class="image-preview"></div>
-                </div>
-
-                <div class="card transport">
-                    <div class="time">22:45</div>
-                    <div class="details-wrapper">
-                        <div class="details">
-                            <h3><i class="fas fa-plane"></i> 樂桃 MM723 返台</h3>
-                            <p>名古屋 NGO ➝ 台北 TPE</p>
-                            <p class="note">若時間充裕：機場內**半藏製麵** (獅子丸擔擔麵)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="info-view" class="view-hidden info-view">
-            
-            <div class="info-section">
-                <h2><i class="fas fa-calculator"></i> 即時匯率查詢</h2>
+                <h2><i class="fas fa-calculator"></i> 匯率計算與設定</h2>
                 <div id="currency-display" class="info-card">
-                    <p id="exchange-rate-link">匯率資訊載入中...</p>
-                </div>
-            </div>
+                    </div>
 
-            <div class="info-section">
-                <h2><i class="fas fa-passport"></i> 航班資訊</h2>
-                <div class="info-card">
-                    <p><strong>去程 (12/18) MM722:</strong> 02:55 - 06:25</p>
-                    <p><strong>回程 (12/22) MM723:</strong> 22:45 - 01:25 (+1)</p>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <h2><i class="fas fa-hotel"></i> 住宿清單 (詳細)</h2>
+                <h2><i class="fas fa-hotel"></i> 住宿詳細資訊</h2>
                 <div id="accommodation-detail-container">
-                    <p>詳細住宿資訊載入中...</p>
-                </div>
-            </div>
+                    </div>
 
-            <div class="info-section">
-                <h2><i class="fas fa-address-book"></i> 緊急聯絡</h2>
+                <h2><i class="fas fa-clipboard-list"></i> 其他重要資訊</h2>
                 <div class="info-card">
-                    <p>**報警:** 110 | **救護:** 119</p>
-                    <p>**外交部急難救助專線:** +81-80-1009-7179</p>
+                    <h3>緊急聯絡電話</h3>
+                    <p>台灣駐日代表處：+81-3-3280-7800</p>
+                    <p>日本報警電話：110</p>
+                    <p>日本急救電話：119</p>
+                    
+                    <h3>旅遊保險</h3>
+                    <p>請確認您的保險細節及理賠方式。</p>
                 </div>
-            </div>
-        </div>
-    </main>
+                
+            </div> </main>
 
-    <nav class="bottom-nav">
-        <button class="nav-btn active" onclick="switchTab('itinerary')">
-            <i class="fas fa-calendar-alt"></i>
-            <span>行程</span>
-        </button>
-        <button class="nav-btn" onclick="switchTab('info')">
-            <i class="fas fa-suitcase"></i>
-            <span>工具/資訊</span>
-        </button>
-    </nav>
+        <nav class="bottom-nav">
+            <button class="nav-btn active" onclick="switchTab('itinerary-view')">
+                <i class="fas fa-map-marked-alt"></i>
+                行程
+            </button>
+            <button class="nav-btn" onclick="switchTab('info-view')">
+                <i class="fas fa-tools"></i>
+                工具/資訊
+            </button>
+        </nav>
 
-    <script src="script.js"></script>
+    </div> <script src="script.js"></script>
 </body>
 </html>
