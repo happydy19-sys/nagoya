@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名古屋冬日之旅</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>NAGOYA 2025</h1>
+        <div class="weather-widget">
+            <span id="weather-text">12月預報: 3°C~12°C ☀</span>
+            <small>建議穿著: 發熱衣、羊毛大衣、圍巾</small>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div id="itinerary-view" class="active-view">
+            <div class="day-tabs">
+                <button class="day-btn active" onclick="showDay('day1')">18<br>Thu</button>
+                <button class="day-btn" onclick="showDay('day2')">19<br>Fri</button>
+                <button class="day-btn" onclick="showDay('day3')">20<br>Sat</button>
+                <button class="day-btn" onclick="showDay('day4')">21<br>Sun</button>
+                <button class="day-btn" onclick="showDay('day5')">22<br>Mon</button>
+            </div>
+
+            <div id="day1" class="day-content active">
+                <div class="date-header">12/18 (四) 犬山城半日遊 & 榮夜景</div>
+                
+                <div class="card transport">
+                    <div class="time">02:55</div>
+                    <div class="details">
+                        <h3><i class="fas fa-plane"></i> 樂桃 MM722 出發</h3>
+                        <p>台北 TPE ➝ 名古屋 NGO</p>
+                        <div class="tags"><span class="tag warning">預留停車</span></div>
+                    </div>
+                </div>
+
+                <div class="card food">
+                    <div class="time">09:00</div>
+                    <div class="details">
+                        <h3><i class="fas fa-coffee"></i> Tsubame Bread & Milk</h3>
+                        <p>名古屋必吃早餐</p>
+                        <div class="guide-tip">💡 推薦：紅豆奶油吐司、霜淇淋厚片</div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Tsubame+Bread+%26+Milk+Nagoya" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
+                    </div>
+                </div>
+
+                <div class="card spot">
+                    <div class="time">11:00</div>
+                    <div class="details">
+                        <h3><i class="fas fa-torii-gate"></i> 犬山城區散策</h3>
+                        <p>犬山城、三光稻荷神社</p>
+                        <div class="guide-tip">📸 必拍：三光稻荷神社的粉紅愛心繪馬！</div>
+                        <div class="tags"><span class="tag must-eat">午餐: Seimen Misaku</span></div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Inuyama+Castle" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
+                    </div>
+                </div>
+
+                <div class="card hotel">
+                    <div class="time">16:00</div>
+                    <div class="details">
+                        <h3><i class="fas fa-bed"></i> Check In</h3>
+                        <p>名古屋站前大和 roynet 飯店</p>
+                    </div>
+                </div>
+
+                <div class="card food">
+                    <div class="time">19:00</div>
+                    <div class="details">
+                        <h3><i class="fas fa-utensils"></i> 月島文字燒</h3>
+                        <div class="tags"><span class="tag reservation">電話預約 19:00</span></div>
+                        <p>榮區晚餐 + HARBS 本店甜點</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="day2" class="day-content">
+                <div class="date-header">12/19 (五) 吉卜力公園</div>
+                
+                <div class="card transport">
+                    <div class="time">07:00</div>
+                    <div class="details">
+                        <h3><i class="fas fa-subway"></i> 前往吉卜力公園</h3>
+                        <p>東山線(藤丘站) 轉 丘陵線(愛地球博公園)</p>
+                    </div>
+                </div>
+
+                <div class="card spot">
+                    <div class="time">08:00</div>
+                    <div class="details">
+                        <h3><i class="fas fa-tree"></i> 吉卜力公園</h3>
+                        <p>全日遊玩</p>
+                        <div class="guide-tip">⚠️ 攻略：園區很大，請依照票券指定時間入場，建議先下載園區地圖 PDF。</div>
+                    </div>
+                </div>
+
+                <div class="card food">
+                    <div class="time">19:00</div>
+                    <div class="details">
+                        <h3><i class="fas fa-utensils"></i> 矢場とん味噌豬排</h3>
+                        <div class="tags"><span class="tag reservation">GMAP預約 19:00</span> <span class="tag must-eat">名古屋名物</span></div>
+                        <p>必點：鐵板味噌豬排，醬汁淋上去的聲音超療癒！</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Yabaton+Nagoya+Station" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="day3" class="day-content">
+                <div class="date-header">12/20 (六) 市區遊・花火大會</div>
+                
+                <div class="card spot">
+                    <div class="time">10:15</div>
+                    <div class="details">
+                        <h3><i class="fas fa-landmark"></i> 名古屋城</h3>
+                        <p>日本三大名城之一</p>
+                        <div class="guide-tip">👀 重點：金鯱（屋頂上的金海豚）</div>
+                    </div>
+                </div>
+
+                <div class="card food">
+                    <div class="time">13:30</div>
+                    <div class="details">
+                        <h3><i class="fas fa-fish"></i> 熱田蓬萊軒 神宮店</h3>
+                        <div class="tags"><span class="tag reservation">電話預約 13:30</span> <span class="tag must-eat">鰻魚三吃</span></div>
+                        <div class="guide-tip">🥢 吃法：1.原味 2.加佐料 3.茶泡飯 4.隨意</div>
+                    </div>
+                </div>
+
+                <div class="card spot">
+                    <div class="time">18:30</div>
+                    <div class="details">
+                        <h3><i class="fas fa-fire"></i> ISOGAI 花火劇場</h3>
+                        <p>名古屋港花火大會</p>
+                        <div class="tags"><span class="tag warning">注意保暖</span></div>
+                    </div>
+                </div>
+
+                <div class="card hotel">
+                    <div class="time">20:30</div>
+                    <div class="details">
+                        <h3><i class="fas fa-bed"></i> Check In</h3>
+                        <p>金星 Neo 飯店</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="day4" class="day-content">
+                <div class="date-header">12/21 (日) 高山・合掌村一日團</div>
+                
+                <div class="card transport">
+                    <div class="time">08:00</div>
+                    <div class="details">
+                        <h3><i class="fas fa-bus"></i> 集合出發</h3>
+                        <p>名古屋站太閣通口西派出所前</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Nagoya+Station+Taikodori+Exit" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
+                    </div>
+                </div>
+
+                <div class="card spot">
+                    <div class="time">08:30</div>
+                    <div class="details">
+                        <h3><i class="fas fa-mountain"></i> 高山 + 合掌村</h3>
+                        <p>飛驒高山老街、白川鄉合掌造</p>
+                        <div class="guide-tip">🍢 必吃：飛驒牛握壽司、五平餅。</div>
+                        <div class="guide-tip">🎁 伴手禮：猴寶寶玩偶 (Sarubobo) 保平安。</div>
+                    </div>
+                </div>
+
+                <div class="card hotel">
+                    <div class="time">20:00</div>
+                    <div class="details">
+                        <h3><i class="fas fa-hot-tub"></i> Dormy Inn PREMIUM</h3>
+                        <p>榮區 / 免費宵夜拉麵 + 溫泉</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="day5" class="day-content">
+                <div class="date-header">12/22 (一) 大須・常滑・返台</div>
+                
+                <div class="card spot">
+                    <div class="time">10:00</div>
+                    <div class="details">
+                        <h3><i class="fas fa-store"></i> 大須商店街</h3>
+                        <p>大須觀音、水曜日的愛麗絲</p>
+                        <div class="tags"><span class="tag must-eat">午餐: 大須の森咖啡(IG預約13:30)</span></div>
+                    </div>
+                </div>
+
+                <div class="card spot">
+                    <div class="time">16:30</div>
+                    <div class="details">
+                        <h3><i class="fas fa-shopping-bag"></i> Aeon Mall 常滑</h3>
+                        <p>招財貓故鄉、最後採買</p>
+                        <div class="guide-tip">✈️ 離機場只有一站，好逛又方便。</div>
+                    </div>
+                </div>
+
+                <div class="card transport">
+                    <div class="time">22:45</div>
+                    <div class="details">
+                        <h3><i class="fas fa-plane"></i> 樂桃 MM723 返台</h3>
+                        <p>名古屋 NGO ➝ 台北 TPE</p>
+                        <p class="note">若時間充裕：半藏製麵 獅子丸擔擔麵</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="info-view" class="view-hidden">
+            <div class="info-section">
+                <h2><i class="fas fa-calculator"></i> 匯率換算</h2>
+                <div class="currency-converter">
+                    <input type="number" id="jpy-input" placeholder="日幣 (JPY)" oninput="convertCurrency()">
+                    <span class="arrow">⬇</span>
+                    <div id="twd-output">約 0 TWD</div>
+   
