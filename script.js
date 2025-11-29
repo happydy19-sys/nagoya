@@ -1,11 +1,11 @@
 // =========================================================================
-// 全域變數與初始化
+// 全域變數與設定
 // =========================================================================
 
-// 匯率設定 (因為 GitHub Pages/本地檔案無法直接存取外部 API，我們提供查詢連結)
+// 匯率設定
 const BASE_CURRENCY = 'TWD'; // 基礎貨幣：台幣
 const TARGET_CURRENCY = 'JPY'; // 目標貨幣：日圓
-// 預設匯率 (1 TWD 可換多少 JPY)
+// 預設匯率 (1 TWD 可換多少 JPY)。您可以在此修改預設值。
 const defaultExchangeRate = 4.5; 
 
 // 住宿清單 - 包含詳細資訊
@@ -55,7 +55,7 @@ const accommodations = [
 
 
 // =========================================================================
-// 核心函式：Tab 切換與日期切換
+// 核心函式：頁面與日期切換
 // =========================================================================
 
 function switchTab(targetViewId) {
@@ -81,7 +81,7 @@ function switchTab(targetViewId) {
         }
     });
 
-    // 如果切換到 info-view，確保住宿清單被渲染
+    // 確保每次切換到資訊頁面都渲染內容
     if (targetViewId === 'info-view') {
         renderAccommodations();
         updateExchangeRateDisplay();
@@ -112,7 +112,68 @@ function showDay(dayId) {
 
 
 // =========================================================================
-// 資訊頁面函式 (匯率與住宿)
+// 資訊頁面函式：匯率換算
+// =========================================================================
+
+/**
+ * 匯率換算函式：將日圓換算為台幣 (使用預設匯率)
+ */
+function convertCurrency() {
+    const jpyInput = document.getElementById('jpy-input');
+    const twdOutput = document.getElementById('twd-output');
+    
+    const jpyValue = parseFloat(jpyInput.value);
+
+    if (isNaN(jpyValue) || jpyValue <= 0) {
+        twdOutput.textContent = '約 0 TWD';
+        return;
+    }
+
+    // 計算 TWD = JPY / (JPY/TWD 匯率)
+    const twdValue = jpyValue / defaultExchangeRate;
+
+    twdOutput.textContent = `約 ${twdValue.toFixed(2)} TWD`;
+}
+
+
+/**
+ * 顯示匯率查詢資訊 (包含換算功能)
+ */
+function updateExchangeRateDisplay() {
+    const container = document.getElementById('currency-display');
+    if (!container) return;
+
+    // 清空舊內容
+    container.innerHTML = ''; 
+
+    // 注入新的換算介面 HTML
+    container.innerHTML = `
+        <div class="currency-converter-box">
+            <p><i class="fas fa-hand-holding-usd"></i> 預設匯率：**1 TWD ≈ ${defaultExchangeRate.toFixed(2)} JPY**</p>
+            
+            <div class="conversion-fields">
+                <input type="number" id="jpy-input" placeholder="日圓 (JPY) 輸入金額" oninput="convertCurrency()">
+                <div class="conversion-arrow"><i class="fas fa-arrow-down"></i></div>
+                <div id="twd-output" class="conversion-result">約 0 TWD</div>
+            </div>
+            
+            <small style="display: block; margin-top: 10px; color: #6c757d;">
+                計算結果為估算值，使用預設匯率。
+            </small>
+
+            <a href="https://www.google.com/search?q=${BASE_CURRENCY}+to+${TARGET_CURRENCY}+exchange+rate" target="_blank" class="map-btn" style="margin-top: 10px; display: block;">
+                <i class="fas fa-external-link-alt"></i> 點此查詢今日即時匯率 (Google)
+            </a>
+        </div>
+    `;
+
+    // 確保一開始就執行一次計算，將結果設為 0
+    convertCurrency(); 
+}
+
+
+// =========================================================================
+// 資訊頁面函式：住宿清單
 // =========================================================================
 
 /**
@@ -176,31 +237,8 @@ function renderAccommodations() {
 }
 
 
-/**
- * 顯示匯率查詢資訊
- */
-function updateExchangeRateDisplay() {
-    const container = document.getElementById('currency-display');
-    if (!container) return;
-
-    // 清空舊內容
-    container.innerHTML = ''; 
-
-    const linkElement = document.createElement('p');
-    linkElement.id = 'exchange-rate-link';
-    linkElement.innerHTML = `
-        <i class="fas fa-info-circle"></i> 匯率會變動，建議每日確認。<br>
-        <span style="color: #007bff; font-weight: bold;">目前預設估算約 ${defaultExchangeRate.toFixed(2)} 日圓/台幣。</span>
-        <a href="https://www.google.com/search?q=${BASE_CURRENCY}+to+${TARGET_CURRENCY}+exchange+rate" target="_blank" class="map-btn" style="margin-top: 10px; display: block;">
-            <i class="fas fa-external-link-alt"></i> 點此查詢今日即時匯率 (Google)
-        </a>
-    `;
-    container.appendChild(linkElement);
-}
-
-
 // =========================================================================
-// 應用程式啟動
+// 應用程式啟動 (初始化)
 // =========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -208,12 +246,22 @@ document.addEventListener('DOMContentLoaded', () => {
     showDay('day1'); 
     
     // 預先載入住宿和匯率資訊 (即使在行程頁面)
+    // 確保當用戶切換到 info-view 時，內容能立即顯示
     renderAccommodations();
     updateExchangeRateDisplay();
 
     // 綁定底部導航列的事件監聽器
     document.querySelectorAll('.bottom-nav .nav-btn').forEach(btn => {
-        const targetViewId = btn.onclick.toString().match(/'([^']*)'/)[1] + '-view';
-        btn.addEventListener('click', () => switchTab(targetViewId));
+        // 從 onclick 屬性中提取目標視圖 ID (e.g., 'itinerary' -> 'itinerary-view')
+        const match = btn.onclick.toString().match(/'([^']*)'/);
+        if (match && match[1]) {
+            const targetViewId = match[1] + '-view';
+            // 替換掉原有的 inline onclick，改用 event listener
+            btn.onclick = null; 
+            btn.addEventListener('click', () => switchTab(targetViewId));
+        }
     });
+    
+    // 修正：手動觸發一次 switchTab 到行程，確保 active 狀態正確
+    switchTab('itinerary-view');
 });
