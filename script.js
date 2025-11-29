@@ -42,7 +42,7 @@ const accommodations = [
             { name: "FamilyMart (鶴舞公園前)", distance: "步行 2 分鐘", mapLink: "https://maps.app.goo.gl/abcdefg3" }
         ],
         mapUrl: "https://www.google.com/maps/place/〒460-0012+愛知県名古屋市中区千代田1-3-11",
-        imageUrl: 'images/kinjo_neo.jpg' 
+        imageUrl: 'images/neo.jpg' 
     },
     {
         name: "Dormy Inn PREMIUM Sakae",
@@ -344,3 +344,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. 修正：手動觸發一次 switchTab 到行程，確保 active 狀態正確
     switchTab('itinerary-view');
 });
+
