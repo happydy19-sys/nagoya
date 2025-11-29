@@ -196,7 +196,7 @@
                             <div class="tags"><span class="tag warning">準時出發，逾時不候</span></div>
                             <a href="https://www.google.com/maps/search/?api=1&query=Nagoya+Station+Taikodori+Exit" target="_blank" class="map-btn"><i class="fas fa-map-marker-alt"></i> 導航</a>
                         </div>
-</div>
+                    </div>
                 </div>
 
                 <div class="card spot">
@@ -273,13 +273,11 @@
         </div>
 
         <div id="info-view" class="view-hidden info-view">
+            
             <div class="info-section">
-                <h2><i class="fas fa-calculator"></i> 即時匯率換算</h2>
-                <div class="currency-converter">
-                    <input type="number" id="jpy-input" placeholder="日幣 (JPY)" oninput="convertCurrency()">
-                    <span class="arrow">⬇</span>
-                    <div id="twd-output">約 0 TWD</div>
-                    <small>以匯率 0.22 估算 (可修改 `script.js`)</small>
+                <h2><i class="fas fa-calculator"></i> 即時匯率查詢</h2>
+                <div id="currency-display" class="info-card">
+                    <p id="exchange-rate-link">匯率資訊載入中...</p>
                 </div>
             </div>
 
@@ -292,11 +290,9 @@
             </div>
 
             <div class="info-section">
-                <h2><i class="fas fa-hotel"></i> 住宿清單</h2>
-                <div class="info-card">
-                    <p>Day 1, 2: **名古屋站前大和roynet飯店**</p>
-                    <p>Day 3: **金星Neo飯店** (近鶴舞站)</p>
-                    <p>Day 4: **Dormy Inn PREMIUM Sakae** (免費宵夜拉麵+溫泉)</p>
+                <h2><i class="fas fa-hotel"></i> 住宿清單 (詳細)</h2>
+                <div id="accommodation-detail-container">
+                    <p>詳細住宿資訊載入中...</p>
                 </div>
             </div>
 
@@ -305,19 +301,6 @@
                 <div class="info-card">
                     <p>**報警:** 110 | **救護:** 119</p>
                     <p>**外交部急難救助專線:** +81-80-1009-7179</p>
-                </div>
-            </div>
-            
-             <div class="info-section">
-                <h2><i class="fas fa-money-check-alt"></i> 記帳/預算表</h2>
-                <div class="info-card">
-                    <p>您可以將此處作為手寫或截圖備忘空間。</p>
-                    <p>**預算分類：**</p>
-                    <p>住宿： ¥ [ ]</p>
-                    <p>交通： ¥ [ ] (名鐵、巴士)</p>
-                    <p>餐飲： ¥ [ ]</p>
-                    <p>門票/行程： ¥ [ ]</p>
-                    <p>購物/伴手禮： ¥ [ ]</p>
                 </div>
             </div>
         </div>
